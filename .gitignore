@@ -1,0 +1,84 @@
+# OS Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Editor Files
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Backup Files
+*.bak
+*.tmp
+*~.md
+*.backup
+
+# Generated Files
+*.pdf
+*.pptx
+*.docx
+slides/*.pdf
+slides/*.pptx
+
+# Build Outputs
+_site/
+.jekyll-cache/
+.jekyll-metadata
+
+# Log Files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Temporary Directories
+tmp/
+temp/
+.temp/
+
+# Personal Notes (if facilitators add them)
+notes/
+personal/
+scratch/
+
+# System Files
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# Certificates / Keys (just in case someone accidentally adds)
+*.pem
+*.key
+*.crt
+*.cert
+*.p12
+*.pfx
+
+# Compressed Archives
+*.zip
+*.tar.gz
+*.rar
+*.7z
+
+# Node modules (if someone adds automation later)
+node_modules/
+
+# Python cache (if someone adds scripts)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
