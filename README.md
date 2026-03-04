@@ -1,311 +1,372 @@
-# GitHub Agentic Workflows Workshop Materials
+# GitHub Copilot Dev Days Workshop Materials
 
-This directory contains comprehensive materials for delivering the "From Code to Automation: Mastering GitHub Agentic Workflows" workshop at GitHub Copilot Dev Days events.
+## "From Code to Automation: Mastering GitHub Agentic Workflows"
 
-## 📦 What's Included
+<div align="center">
+
+![GitHub Copilot Dev Days](https://img.shields.io/badge/GitHub-Copilot%20Dev%20Days-blue)
+![Workshop Duration](https://img.shields.io/badge/Duration-2%20hours-green)
+![Skill Level](https://img.shields.io/badge/Level-Beginner%20to%20Advanced-orange)
+![License](https://img.shields.io/badge/License-MIT-yellow)
+
+**Complete workshop materials for teaching GitHub Agentic Workflows at community events**
+
+[Overview](#-overview) •
+[Quick Start](#-quick-start) •
+[Materials](#-materials-included) •
+[Usage](#-using-these-materials) •
+[Contributing](#-contributing)
+
+</div>
+
+---
+
+## 🎯 Overview
+
+This repository contains comprehensive, battle-tested materials for delivering a 2-hour hands-on workshop teaching **GitHub Agentic Workflows**—a revolutionary way to automate repository maintenance, continuous improvement, and development workflows using natural language and AI.
+
+Perfect for **GitHub Copilot Dev Days** events, user groups, conferences, and team training sessions.
+
+### What Participants Will Learn
+
+- Write intelligent automation workflows in natural language (no YAML required)
+- Implement continuous improvement patterns (tests, documentation, refactoring)
+- Automate issue management and triage
+- Build CI/CD coaching and diagnostics systems
+- Create self-organizing, self-improving repositories
+- Apply proper safety guardrails for AI automation
+
+### Workshop Highlights
+
+✨ **Progressive Learning** - Start simple, build sophistication naturally  
+🎓 **Hands-on Practice** - Build real workflows on actual repositories  
+🔒 **Safety First** - Teach proper guardrails and human-in-the-loop patterns  
+🌍 **Community-Ready** - Designed for diverse audiences and skill levels  
+📦 **Complete Package** - Everything needed from setup to follow-up
+
+---
+
+## 🚀 Quick Start
 
 ### For Event Organizers
 
-- **[gh-agentic-workflows-session.md](gh-agentic-workflows-session.md)** - Complete session description for event pages, including:
-  - Event page copy
-  - Learning outcomes
-  - Target audience
-  - Prerequisites
-  - Materials needed
-  - Follow-up resources
+1. **Review the materials**  
+   Browse the [workshop materials](/docs/workshop/) for a complete overview
+
+2. **Customize for your event**  
+   Edit [gh-agentic-workflows-session.md](docs/workshop/gh-agentic-workflows-session.md) with your event details
+
+3. **Prepare your venue**  
+   Ensure WiFi, projector, and seating are ready for hands-on work
+
+4. **Promote your workshop**  
+   Use the event descriptions and session tags provided
 
 ### For Facilitators
 
-- **[facilitator-guide.md](facilitator-guide.md)** - Detailed 2-hour workshop guide with:
-  - Minute-by-minute timeline
-  - Setup instructions
-  - Live coding demonstrations
-  - Discussion prompts
-  - Troubleshooting tips
-  - Checkpoint questions
-  - Common pitfalls to avoid
+1. **Study the facilitator guide**  
+   [facilitator-guide.md](docs/workshop/facilitator-guide.md) has minute-by-minute instructions
+
+2. **Practice the exercises**  
+   Run through all exercises yourself first (allow 3+ hours for prep)
+
+3. **Set up your demo environment**  
+   Fork [CopilotAdventures](https://github.com/microsoft/CopilotAdventures) and test workflows
+
+4. **Prepare backups**  
+   Have screenshots, recordings, and backup examples ready
+
+5. **Review the slide deck**  
+   Build your presentation using [slide-deck-outline.md](docs/workshop/slide-deck-outline.md)
 
 ### For Participants
 
-- **[participant-handout.md](participant-handout.md)** - Student reference guide containing:
-  - All setup commands
-  - Exercise instructions
-  - Workflow creation patterns
-  - Troubleshooting guide
-  - Resource links
-  - Quick command reference
+1. **Review prerequisites**  
+   Check [participant-handout.md](docs/workshop/participant-handout.md) for required setup
 
-### Resources
+2. **Bring your laptop**  
+   With admin rights to install software
 
-- **[example-workflow-prompts.md](example-workflow-prompts.md)** - Library of 28+ tested workflow prompts:
-  - Daily operations (standups, health reports)
-  - Continuous improvement (tests, refactoring)
-  - CI/CD enhancement (coach, doctor)
-  - Issue management (triage, planning)
-  - Maintenance (dependencies, dead code)
-  - Security & compliance
-  - Community & communication
-  - Advanced patterns
+3. **Have your accounts ready**
+   - GitHub account (free)
+   - GitHub Copilot access (trial available)
 
-## 🎯 Workshop Overview
+4. **Print the quick reference**  
+   [quick-reference-card.md](docs/workshop/quick-reference-card.md) for easy access during workshop
 
-**Title:** From Code to Automation: Mastering GitHub Agentic Workflows  
-**Duration:** 2 hours  
-**Format:** Hands-on, progressive complexity  
-**Prerequisites:** GitHub account, GitHub Copilot access, laptop
+---
 
-### Learning Progression
+## 📦 Materials Included
+
+| File                                                                             | Purpose                                         | Target Audience  |
+| -------------------------------------------------------------------------------- | ----------------------------------------------- | ---------------- |
+| [gh-agentic-workflows-session.md](docs/workshop/gh-agentic-workflows-session.md) | Event page description, learning outcomes       | Event Organizers |
+| [facilitator-guide.md](docs/workshop/facilitator-guide.md)                       | Complete workshop delivery guide (9,000+ words) | Facilitators     |
+| [participant-handout.md](docs/workshop/participant-handout.md)                   | Student reference with all commands             | Participants     |
+| [example-workflow-prompts.md](docs/workshop/example-workflow-prompts.md)         | 28+ tested workflow patterns                    | Everyone         |
+| [slide-deck-outline.md](docs/workshop/slide-deck-outline.md)                     | 15-slide presentation structure                 | Facilitators     |
+| [quick-reference-card.md](docs/workshop/quick-reference-card.md)                 | One-page printable cheat sheet                  | Participants     |
+
+### Content Overview
+
+**Total Pages:** ~100+ pages of content  
+**Preparation Time:** 3-4 hours for first-time facilitators  
+**Delivery Time:** 2 hours standard, extensible to 3+ hours  
+**Exercise Count:** 11 progressive hands-on exercises  
+**Workflow Patterns:** 28 ready-to-use examples
+
+---
+
+## 🎓 Using These Materials
+
+### License & Usage
+
+These materials are released under the MIT License. You are free to:
+
+- ✅ Use for community events, workshops, and training
+- ✅ Modify and customize for your audience
+- ✅ Distribute to participants
+- ✅ Create derivative works
+
+**Attribution appreciated but not required.**
+
+### Recommended Approach
+
+1. **Don't change everything** - The materials are tested and work well as-is
+2. **Customize minimally** - Add your personality and local examples
+3. **Practice first** - Run through once before delivering
+4. **Gather feedback** - Use participant feedback to improve
+5. **Share back** - Contribute improvements via PR
+
+### Customization Ideas
+
+- **Add your branding** - Logo, colors, contact info
+- **Localize content** - Language, cultural references, local examples
+- **Adjust difficulty** - More or fewer advanced topics based on audience
+- **Change timing** - Extend or compress based on available time
+- **Add exercises** - Include organization-specific scenarios
+
+---
+
+## 🌟 Workshop Format
+
+### Standard 2-Hour Format
 
 ```
-0:00-0:15   Introduction → Why agentic workflows matter
-0:15-0:30   Setup → Install CLI, create repository, configure
-0:30-1:45   Hands-on Exercises → Progressive complexity
-              ├─ Simple workflows (daily status)
-              ├─ Quality workflows (CI coach/doctor)
-              ├─ Continuous improvement (tests, docs)
-              ├─ Repository management (assistant, triage)
-              ├─ Planning automation (/plan command)
-              └─ Advanced patterns (reuse, maintenance)
-1:45-2:00   Wrap-up → Retrospective, Q&A, next steps
+0:00-0:15   Introduction & Concepts
+0:15-0:30   Setup (CLI, repository, authentication)
+0:30-1:45   Progressive Hands-on Exercises
+              → Daily operations (standup reports)
+              → CI/CD enhancement (coach & doctor)
+              → Continuous improvement (tests, docs)
+              → Issue management (triage, planning)
+              → Advanced patterns (reuse, maintenance)
+1:45-2:00   Wrap-up, Retrospective, Q&A
 ```
 
-### Key Teaching Concepts
+### Dual Track Option (2.5-3 Hours)
 
-1. **Three Creation Methods** (scaffold understanding)
-   - CLI Wizard: Simple, template-based
-   - Cloud Agent: Higher quality, documentation-aware
-   - Repository Agent: Best quality, context-aware
+- **Beginner Track** - Guided templates, understanding concepts
+- **Advanced Track** - Build from scratch, sophisticated patterns
+- **Shared Sessions** - Intro, setup, demo sharing, wrap-up
 
-2. **Progressive Complexity** (natural growth)
-   - Start with obvious wins (daily standup)
-   - Add value incrementally (CI help, tests)
-   - Address emerging needs (issue management)
-   - Build sophisticated systems (orchestration)
+### Extended Format (Half Day)
 
-3. **Automation Requires Management** (meta-automation)
-   - Show issues growing overwhelming
-   - Solve with repository assistant
-   - Demonstrate self-organizing systems
+Add:
 
-4. **Human-in-the-Loop** (guardrails)
-   - AI proposes, humans decide
-   - Review all auto-generated PRs
-   - Approval gates for critical operations
+- Break periods
+- Team collaboration exercises
+- Deeper dives into security and governance
+- Participant presentations
+- Office hours for individual projects
 
-## 🚀 Quick Start for Facilitators
+---
 
-### 1 Week Before Workshop
+## 🏗️ Technology Stack
 
-- [ ] Review all materials thoroughly
-- [ ] Test all exercises in your own repository
-- [ ] Customize examples to your audience
-- [ ] Set up demo repository
-- [ ] Test equipment (projector, WiFi)
-- [ ] Print participant handouts (optional)
+### What Participants Will Use
 
-### 1 Day Before Workshop
+- **GitHub CLI** (`gh`) - Command line interface for GitHub
+- **gh-aw Extension** - GitHub Agentic Workflows CLI
+- **Git** - Version control
+- **GitHub Account** - With Copilot access
+- **VS Code** (optional) - For repository agent features
 
-- [ ] Run through entire workshop once
-- [ ] Verify all workflows still work
-- [ ] Check for updates to gh-aw CLI
-- [ ] Prepare backup PAT tokens
-- [ ] Charge laptop fully
-- [ ] Download any needed resources
+### What Workflows Run On
 
-### Day of Workshop
+- **GitHub Actions** - Execution environment
+- **GitHub Copilot API** - AI intelligence
+- **GitHub API** - Repository interactions
 
-- [ ] Arrive 30 minutes early
-- [ ] Test all tech (projector, WiFi, demos)
-- [ ] Have backup laptop ready
-- [ ] Post WiFi info and links
-- [ ] Welcome participants as they arrive
+### Prerequisites
 
-### During Workshop
+- Windows, Mac, or Linux laptop
+- Admin rights to install software
+- Internet connection
+- Modern web browser
 
-- [ ] Use checkpoints to keep everyone together
-- [ ] Encourage questions throughout
-- [ ] Celebrate when workflows work
-- [ ] Stay calm when demos fail (they will)
-- [ ] Help struggling participants
+---
 
-### After Workshop
+## 📊 Success Metrics
 
-- [ ] Share resources with participants
-- [ ] Collect feedback via survey
-- [ ] Document lessons learned
-- [ ] Update materials based on feedback
-- [ ] Follow up with community
+### Workshop Outcomes
 
-## 📋 Materials Checklist
+After completing this workshop, participants should be able to:
 
-### Digital Assets
+- [ ] Explain what GitHub Agentic Workflows are and why they matter
+- [ ] Install and configure the gh-aw CLI
+- [ ] Create workflows using all three methods (CLI, cloud, repo agent)
+- [ ] Implement at least 5 different workflow patterns
+- [ ] Apply appropriate safety guardrails
+- [ ] Have a working repository with active automation
+- [ ] Continue building workflows independently
 
-- [ ] Facilitator guide (this repository)
-- [ ] Participant handout (this repository)
-- [ ] Example workflow prompts (this repository)
-- [ ] Slide deck (create from slide-outline.md)
-- [ ] Demo repository with working workflows
-- [ ] Feedback survey link
-- [ ] Resource links document
+### Facilitator Success Indicators
 
-### Physical Setup
+- **High engagement** - Most participants complete exercises
+- **Positive energy** - Questions, excitement, discussion
+- **Working demos** - Workflows actually produce results
+- **Clear takeaways** - Participants know next steps
+- **Community building** - Attendees connect with each other
 
-- [ ] Laptop (fully charged)
-- [ ] Backup laptop
-- [ ] Power strips/extension cords
-- [ ] HDMI/display adapters
-- [ ] Wireless presenter remote (optional)
-- [ ] Printed handouts (optional)
-- [ ] Whiteboard markers
-- [ ] Sticky notes for questions
-
-### Accounts & Access
-
-- [ ] GitHub account (facilitator)
-- [ ] GitHub Copilot license
-- [ ] Demo repository prepared
-- [ ] gh-aw CLI installed and tested
-- [ ] PAT token created and tested
-- [ ] Backup PAT tokens for emergencies
-
-## 🎓 Using CopilotAdventures Repository
-
-This workshop uses the [CopilotAdventures](https://github.com/microsoft/CopilotAdventures) repository as the foundation because:
-
-1. **Multi-language**: C#, JavaScript, Python - shows workflows work across languages
-2. **Simple codebase**: Easy to understand, focus on automation not domain logic
-3. **Clear structure**: Well-organized, easy to find improvement opportunities
-4. **Existing patterns**: Has solutions, tests, documentation to work with
-5. **Educational**: Participants can continue using after workshop
-
-### Why This Works
-
-- **Immediate improvements**: Easy to spot missing tests, outdated docs
-- **Clear examples**: Solution files are simple and understandable
-- **Multiple tracks**: Beginners and advanced users find relevant exercises
-- **Real value**: Participants leave with working automation
-- **Continuation**: Can continue improving after workshop
-
-## 💡 Customization Tips
-
-### For Different Audiences
-
-**Junior Developers:**
-
-- Spend more time on setup
-- Use more guided exercises
-- Focus on simpler workflows
-- Emphasize learning over sophistication
-
-**Senior Developers:**
-
-- Move faster through setup
-- Focus on advanced patterns
-- Encourage experimentation
-- Discuss team adoption strategies
-
-**DevOps/Platform Engineers:**
-
-- Emphasize CI/CD patterns
-- Cover security and compliance
-- Discuss integration with existing tools
-- Focus on organization-wide adoption
-
-**Open Source Maintainers:**
-
-- Focus on community management workflows
-- Cover triage and communication patterns
-- Discuss contributor engagement
-- Address scaling challenges
-
-### For Different Time Slots
-
-**90 Minutes:**
-
-- Skip advanced patterns section
-- Combine exercises 4-6
-- Shorter Q&A
-- Provide resources for self-study
-
-**3 Hours:**
-
-- Add dual track (beginner/advanced)
-- Include more experimentation time
-- Add team discussion sessions
-- Cover additional patterns
-
-**Half Day (4 hours):**
-
-- Add break periods
-- Include team project work
-- Cover advanced orchestration
-- Have participants share creations
-
-## 📚 Additional Resources
-
-### For Facilitators
-
-- [GitHub Agentic Workflows Docs](https://github.github.com/gh-aw/)
-- [Peli's Agent Factory](https://github.github.com/gh-aw/blog/2026-01-12-welcome-to-pelis-agent-factory/)
-- [GitHub Actions Documentation](https://docs.github.com/actions)
-- [Copilot Dev Days Resources](https://github.com/github/GitHub-Copilot-Dev-Days)
-
-### For Participants
-
-- [Quick Start Guide](https://github.github.com/gh-aw/setup/quick-start/)
-- [Security Architecture](https://github.github.com/gh-aw/introduction/architecture/)
-- [Community Discussions](https://github.com/orgs/community/discussions/186451)
-- [GitHub Next Discord](https://gh.io/next-discord)
-- [Workflow Library](https://github.com/githubnext/agentics)
+---
 
 ## 🤝 Contributing
 
-Found something that works well? Have suggestions for improvements?
+We welcome improvements and adaptations! Here's how to contribute:
 
-1. Test your changes in a real workshop setting
-2. Document what worked and what didn't
-3. Submit a PR with:
-   - Clear description of change
-   - Why it improves the workshop
-   - Any facilitator notes
-4. Share feedback in GitHub Discussions
+### Reporting Issues
 
-## 📞 Support
+Found a problem? Please open an issue with:
 
-**Questions about the workshop materials?**
+- Which material has the issue
+- What's wrong or unclear
+- Suggested improvement
+- Context (audience type, timing, etc.)
 
-- Open an issue in this repository
-- Ask in GitHub Discussions
-- Join GitHub Next Discord
+### Suggesting Improvements
 
-**Running a workshop?**
+Have an idea? Create an issue or PR with:
 
-- Follow GitHub Copilot Dev Days guidelines
-- Register on the Luma calendar
-- Share your experiences with the community
+- Description of the improvement
+- Why it would help
+- Any testing you've done
+- Impact on timing or flow
 
-## 🎉 Success Stories
+### Sharing Your Experience
 
-After successfully running this workshop, please share:
+Delivered the workshop? Please share:
 
 - Number of participants
 - What worked well
 - What needed adjustment
-- Interesting workflows created
-- Feedback from participants
+- Questions that came up
+- Feedback from attendees
 - Photos/tweets (with permission)
 
-We'd love to feature your event!
+### Contributing New Materials
 
-## 📄 License
+Want to add content? Consider:
 
-These workshop materials are part of the CopilotAdventures repository and follow the same license terms.
+- **New workflow patterns** - Add to example-workflow-prompts.md
+- **Advanced exercises** - Extend facilitator guide
+- **Translations** - Localize materials
+- **Slide decks** - Share your presentation
+- **Videos** - Record and share (with permission)
 
 ---
 
-**Created for:** GitHub Copilot Dev Days 2026  
-**Workshop:** From Code to Automation: Mastering GitHub Agentic Workflows  
-**Maintainers:** [Your name/team]  
-**Last Updated:** March 4, 2026
+## 🌍 Community
 
-**Happy automating! 🚀**
+### GitHub Copilot Dev Days
+
+This workshop is designed for the global **GitHub Copilot Dev Days** initiative:
+
+- **Dates:** March 15 - May 15, 2026
+- **Format:** Community-led, in-person events
+- **Calendar:** [aka.ms/githubcopilotdevdays](https://aka.ms/githubcopilotdevdays)
+
+### Connect & Share
+
+- **Discussions:** Share experiences and ask questions
+- **GitHub Next Discord:** [gh.io/next-discord](https://gh.io/next-discord)
+- **Community Forum:** [GitHub Discussions](https://github.com/orgs/community/discussions/186451)
+- **Social Media:** Tag `#GitHubCopilotDevDays`
+
+### Related Resources
+
+- **GitHub Agentic Workflows Docs:** [github.github.com/gh-aw](https://github.github.com/gh-aw/)
+- **Peli's Agent Factory:** Blog with examples and patterns
+- **CopilotAdventures:** Practice repository used in workshop
+- **Workflow Library:** [github.com/githubnext/agentics](https://github.com/githubnext/agentics)
+
+---
+
+## 📅 Version History
+
+- **v1.0** (March 2026) - Initial release for Copilot Dev Days 2026
+  - Complete 2-hour workshop
+  - 7 comprehensive materials
+  - 28 workflow patterns
+  - Tested with pilot groups
+
+---
+
+## 📞 Support
+
+### Questions About Materials
+
+- **General questions:** Open an issue in this repository
+- **Workshop delivery:** Join GitHub Next Discord
+- **Content suggestions:** Submit a PR or issue
+
+### Running Your Workshop
+
+- **Event registration:** [GitHub Copilot Dev Days Form](https://aka.ms/githubcopilotdevdays/form)
+- **Event calendar:** [Luma Calendar](https://aka.ms/githubcopilotdevdays)
+- **Organizer resources:** [GitHub-Copilot-Dev-Days Repository](https://github.com/github/GitHub-Copilot-Dev-Days)
+
+---
+
+## 📄 License
+
+MIT License - See LICENSE file for details.
+
+**Summary:** Use freely, modify as needed, attribution appreciated.
+
+---
+
+## 🙏 Acknowledgments
+
+These materials were created for the GitHub Copilot Dev Days 2026 community event series.
+
+**Special Thanks:**
+
+- GitHub Next team for GitHub Agentic Workflows
+- GitHub Copilot team for the AI capabilities
+- CopilotAdventures contributors for the practice repository
+- Community organizers worldwide hosting events
+- Early workshop participants for feedback
+
+---
+
+## 🚀 Ready to Get Started?
+
+1. **Browse the [workshop materials](docs/workshop/)** - Understand what's included
+2. **Review [facilitator-guide.md](docs/workshop/facilitator-guide.md)** - Learn the flow
+3. **Practice the exercises** - Get hands-on experience
+4. **Register your event** - Put it on the calendar
+5. **Deliver with confidence** - You've got this!
+
+---
+
+<div align="center">
+
+**Let's build the future of automated development together! 🚀**
+
+Questions? Feedback? Want to share your workshop experience?  
+[Open an issue](./issues) or [start a discussion](./discussions)
+
+**Made with ❤️ for the GitHub Copilot community**
+
+</div>
