@@ -95,7 +95,11 @@ Present commands with clear context:
 **Create a new workflow:**
 
 ```bash
-gh workflow create my-workflow
+gh aw add my-workflow
+# or
+gh aw new my-workflow
+# or use the wizard
+gh aw add-wizard my-workflow
 ```
 ````
 
@@ -411,9 +415,13 @@ Use conventional commits style:
 ### External Resources Referenced
 
 - **GitHub CLI** (`gh`) - Command-line tool for GitHub
+  - Reference: https://cli.github.com/manual/
 - **GitHub Copilot** - AI pair programmer
+  - Reference: https://docs.github.com/en/copilot/reference
 - **GitHub Agentic Workflows** - The feature being taught
+  - Reference: https://github.github.com/gh-aw/
 - **CopilotAdventures** - Example repository for practice
+  - Reference: https://github.com/microsoft/CopilotAdventures
 
 When updating materials, verify these resources are still current.
 
