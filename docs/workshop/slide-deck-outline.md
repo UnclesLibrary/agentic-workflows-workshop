@@ -333,7 +333,7 @@ Title: "Daily Standup - [date]"
 
 **What You'll Do:**
 
-- Fork your own copy
+- Create your own repository from CopilotAdventures
 - Add automation workflows
 - See immediate improvements
 - Keep improving after workshop

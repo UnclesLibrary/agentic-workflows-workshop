@@ -629,7 +629,7 @@ By completing this workshop, you now know how to:
 
 ### Immediate (This Week)
 
-- Experiment with your CopilotAdventures fork
+- Experiment with your CopilotAdventures repository
 - Add one workflow to a personal project
 - Join the GitHub Next Discord community
 - Share your workflows in GitHub Discussions

@@ -30,7 +30,7 @@ Using the multi-language CopilotAdventures repository, you'll create real workfl
 - **No experience required** - we'll start from scratch
 - Hands-on, practical exercises with immediate results
 - Progressive learning from simple to sophisticated
-- Work on your own fork you can continue using after
+- Work on your own repository (created from CopilotAdventures) you can continue using after
 - Learn three approaches: CLI wizard, cloud agent, and VS Code agent
 
 **Prerequisites:**
@@ -43,7 +43,7 @@ Using the multi-language CopilotAdventures repository, you'll create real workfl
 **Duration:** 2 hours
 
 **What to Bring:**
-Your curiosity and a willingness to let AI help you automate the boring stuff! Leave with running workflows on your own repository and the knowledge to build more.
+Your curiosity and a willingness to let AI help you automate the boring stuff! Leave with a new repository in your GitHub account containing working agentic workflows and the knowledge to build more.
 
 ---
 

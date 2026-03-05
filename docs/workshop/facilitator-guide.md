@@ -1296,7 +1296,7 @@ All orchestrated by GitHub Agentic Workflows 🚀
 
 **Your Repository:**
 
-- Keep experimenting with your CopilotAdventures fork
+- Keep experimenting with your CopilotAdventures repository
 - Try adding workflows for your own projects
 - Share your creations with the community
 
@@ -1436,7 +1436,7 @@ A: "No! It amplifies developers. You describe what you want, review the results,
 - **Cause:** "Allow GitHub Actions to create PRs" not enabled
 - **Fix:** Settings → Actions → Workflow permissions → Enable
 
-**Issue: Participant can't fork/clone**
+**Issue: Participant can't create/clone repository**
 
 - **Cause:** Network/firewall restrictions
 - **Fix:** Use GitHub Codespaces as alternative environment
