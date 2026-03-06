@@ -35,16 +35,26 @@ winget install --id GitHub.cli
 brew install gh
 ```
 
-**Linux:**
+**Linux (Debian/Ubuntu):**
 
 ```bash
-# See: https://github.com/cli/cli#installation
+# Install from GitHub CLI repository
+sudo mkdir -p -m 755 /etc/apt/keyrings
+wget -qO- https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo tee /etc/apt/keyrings/githubcli-archive-keyring.gpg > /dev/null
+sudo chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+sudo apt update
+sudo apt install gh -y
+
+# For other distributions (Fedora, Arch, etc.):
+# See: https://github.com/cli/cli/blob/trunk/docs/install_linux.md
 ```
 
 **Verify:**
 
 ```bash
 gh --version
+# Should show version 2.87.3 or higher
 ```
 
 ### 2. Install Extensions
@@ -58,6 +68,7 @@ gh extension install github/gh-aw
 
 # Verify installation
 gh aw --version
+# Should show version 0.51.5 or higher
 ```
 
 ### 3. Authenticate with GitHub
@@ -65,12 +76,19 @@ gh aw --version
 ```bash
 gh auth login
 
-# Follow prompts:
-# - Choose: GitHub.com
-# - Choose: HTTPS
-# - Authenticate: Yes
-# - Copy one-time code
-# - Open browser and paste code
+# Follow the prompts:
+# ? Where do you use GitHub? → GitHub.com
+# ? What is your preferred protocol for Git operations? → HTTPS
+# ? Authenticate Git with your GitHub credentials? → Yes
+# ? How would you like to authenticate GitHub CLI? → Login with a web browser
+
+# Copy the one-time code (e.g., XXXX-XXXX)
+# Press Enter to open https://github.com/login/device in your browser
+# Paste the code in the browser and authorize
+
+# Expected output:
+# ✓ Authentication complete.
+# ✓ Logged in as <your-github-username>
 ```
 
 ---
