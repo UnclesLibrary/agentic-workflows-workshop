@@ -33,7 +33,7 @@
 | ---- | ----------------------------- | -------- | ------------------------------ |
 | 0:00 | Intro & Welcome               | 15 min   | Presentation                   |
 | 0:15 | Setup                         | 15 min   | Installation & Config          |
-| 0:30 | Exercise 1: Daily Status      | 10 min   | First workflow with wizard     |
+| 0:30 | Exercise 1: Daily Status      | 10 min   | First workflow interactively   |
 | 0:40 | Exercise 2: CI Coach & Doctor | 15 min   | Using cloud agent              |
 | 0:55 | Exercise 3: Test Automation   | 10 min   | Scheduled workflows            |
 | 1:05 | Exercise 4: Repository Init   | 10 min   | `gh aw init` and agents        |
@@ -103,23 +103,25 @@ Title: "Daily Standup Summary - [date]"
 
 **SLIDE 3: Three Ways to Create Workflows**
 
-1. **CLI Wizard** (`gh aw create`)
-   - Guided prompts
+1. **Interactive CLI** (`gh aw new`)
+   - Interactive guided prompts
    - Quick and simple
    - Good for learning
-   - Basic template substitution
+   - Creates .md source and .lock.yml compiled files
+   - Basic prompt quality
 
-2. **Cloud Agent** (prompt with URL)
+2. **Cloud Agent** (web browser agent tab)
    - Use before `gh aw init`
    - References documentation automatically
    - Higher quality results
-   - Better for complex workflows
+   - Better prompts for complex workflows
 
-3. **Repository Agent** (VS Code/Chat after `gh aw init`)
+3. **Repository Agent** (VS Code Copilot Chat after `gh aw init`)
+   - Use `/agents` command and select from UI
    - Best quality results
-   - Context-aware
+   - Context-aware of your repository
    - Can reference existing workflows
-   - Integrates with Copilot
+   - Integrates deeply with Copilot
 
 **SLIDE 4: Guardrails & Safety**
 
@@ -334,101 +336,153 @@ gh aw secrets set COPILOT_GITHUB_TOKEN --value "YOUR_TOKEN_HERE"
 
 ### Learning Objectives
 
-- Create first workflow using CLI wizard
-- Understand basic workflow structure
+- Create first workflow using interactive CLI (`gh aw new`)
+- Understand workflow structure (.md source and .lock.yml compiled)
+- Learn about frontmatter and natural language instructions
 - See workflow run and produce results
+- Recognize limitations of basic prompts (setup for future exercises)
 
-### Introduction (1 min)
+### Introduction (2 min)
 
 **Say:**
 
-> "Let's start with something immediately useful: a daily standup report. Every morning at 9 AM, our repository will create an issue summarizing what happened yesterday. Perfect for remote teams or async standups."
+> "Before we dive into creating workflows, let's talk about why we're here. Imagine your team of 9 people working on this repository. You have daily standups and progress boards, but what happens when someone has a day off? Who notices that PR sitting open for 2 days without a review? Who remembers to mention everything during standup?
+> 
+> Instead of relying solely on humans to track everything, we're going to create automated assistants that work 24/7. They never forget, never take days off, and always provide objective data about what's happening in your repository.
+>
+> Let's start with the most fundamental need: knowing what happened in your repository each day. We'll create a daily standup report that runs every morning at 9 AM."
 
 ### Live Code-Along (6 min)
 
-**Step 1: Create workflow using wizard**
+**Step 1: Create workflow using interactive CLI**
 
 ```bash
-gh aw create
+gh aw new
 ```
 
-**Prompts and Responses:**
+💡 **Note:** This command launches an interactive mode that guides you through creating a workflow.
 
+**Guide through the prompts:**
+
+**1. What should we call this workflow?**
 ```
-? What would you like to name this workflow?
-> daily-standup-status
-
-? What should this workflow do?
-> Run daily at 9 AM and create an issue with a summary of repository activity from the past 24 hours. Include commits, pull requests, issues, and any CI/CD failures. Title: "Daily Standup - [date]"
-
-? When should this workflow run?
-> schedule (daily at 9 AM)
-
-? Does the workflow need any special permissions?
-> Issues: write, Contents: read, Pull Requests: read
-
-? Review and confirm? (y/n)
-> y
+daily-report
 ```
 
-**Say while waiting:**
+**2. When should this workflow run?**
+- Show options and select: `Schedule (daily, scattered execution time)`
 
-> "The wizard is generating the workflow file. It's using a template and substituting our description."
+**3. Which AI engine should process this workflow?**
+- Show options and select: `copilot - GitHub Copilot CLI`
 
-**Step 2: Review generated workflow**
+**4. Which tools should the AI have access to?**
+- Navigate and select: `github` - GitHub API tools
+- Point out the tools it enables:
+  - `create-issue`
+  - `add-comment`
+  - `close-issue`
+  - `update-issue`
 
-```bash
-# Open the generated workflow file
-code .github/workflows/daily-standup-status.yml
+**5. Network Access Control**
+- Leave defaults (arrow down to continue)
+
+**Say:** "For this workflow, we don't need external network access. The AI will only use GitHub's API."
+
+**6. What should this workflow do?**
+```
+Run daily at 9 AM and create an issue with a summary of repository activity from past 24 hours. Include commits, pull requests, issues, and CI/CD failures.
 ```
 
-**Point out:**
+**Say while it compiles:**
 
-- YAML structure (they don't need to write this)
-- Schedule trigger: `cron: '0 9 * * *'`
-- The `uses: github/agentic-workflows` action
-- Their description in the workflow
+> "The system is now compiling your workflow. This takes your natural language description and creates the actual GitHub Actions workflow files."
 
-**Step 3: Commit and push**
-
-```bash
-git add .github/workflows/daily-standup-status.yml
-git commit -m "Add daily standup status workflow"
-git push
-```
-
-**Step 4: Trigger manually for demo**
-
-**Say:** "We don't want to wait until tomorrow at 9 AM. Let's trigger it manually."
-
-**Screen Share:** GitHub Actions tab
-
-1. Go to Actions tab in repository
-2. Find "Daily Standup Status" workflow
-3. Click "Run workflow" → Run workflow
-4. Watch it run (takes 1-2 minutes)
-
-### Review Results (3 min)
-
-**Navigate to Issues tab**
-
-**Point out:**
-
-- New issue created by the workflow
-- Structured summary: commits, PRs, issues
-- Professional formatting
-- Actionable information
+**Step 2: Review the generated files**
 
 **Say:**
 
-> "This is now running every day at 9 AM automatically. You wake up, check your issues, and know exactly what happened yesterday. No manual work required."
+> "Notice it created TWO files in `.github/workflows/`. Let's look at both."
 
-**Discussion Questions:**
+```bash
+# List the files
+ls -la .github/workflows/
 
-- "How would this help your team?"
-- "What other daily summaries might be useful?"
+# Review the markdown source
+cat .github/workflows/daily-report.md
 
-**Checkpoint:** "Everyone should have a workflow running or completed. Raise your hand if you need help."
+# Review the compiled lock file
+cat .github/workflows/daily-report.lock.yml
+```
+
+**Point out in `daily-report.md`:**
+
+-**Frontmatter** (between `---` markers):
+  - `on: schedule` - When it runs
+  - `permissions` - What it can access
+  - `tools` - Capabilities (create-issue, etc.)
+- **Natural language instructions** below the frontmatter
+
+**Point out in `daily-report.lock.yml`:**
+
+- This is the compiled GitHub Actions workflow
+- Contains a simplified version of your prompt
+- This is what GitHub Actions actually executes
+- Gets regenerated when you edit the `.md` file
+
+**Say:**
+
+> "The `.md` file is your source of truth - you edit this one. The `.lock.yml` file is compiled from it. Always commit both files together."
+
+📚 **Reference:** Point participants to [How Agentic Workflows Work](https://github.github.com/gh-aw/introduction/how-they-work/)
+
+**Step 3: Observe the limitation (Important setup for next exercises)**
+
+**Say:**
+
+> "Now here's something important: look at the prompt inside the .lock.yml file. It's very basic - just the description we typed. This will work, but the quality depends heavily on your prompt. A simple one-sentence description means the AI might miss details, format inconsistently, or lack proper error handling.
+> 
+> This is perfectly fine for learning, but in the next exercises, we'll use more sophisticated approaches that generate much better prompts and higher-quality workflows. Think of this as 'Workflow Creation 101' - simple but limited."
+
+**Step 4: Commit and push**
+
+```bash
+git add .github/workflows/daily-report.md .github/workflows/daily-report.lock.yml
+git commit -m "Add daily report workflow (basic version)"
+git push
+```
+
+### Trigger and Review (2 min)
+
+**Step 5: Trigger manually for demo**
+
+**Say:** "Since it's scheduled for 9 AM daily, let's trigger it manually now to see it work."
+
+**Screen Share:** GitHub Actions tab
+
+1. Navigate to Actions tab
+2. Find "daily-report" workflow in the list
+3. Click "Run workflow" button → Run workflow
+4. Watch it execute (usually 1-2 minutes)
+
+**While waiting:**
+
+> "The workflow is now running an AI agent inside GitHub Actions. It's querying the GitHub API for repository activity and using AI to summarize it."
+
+### Review Results (1 min - if time permits)
+
+**Navigate to Issues tab**
+
+**Point out if the issue was created:**
+
+- New issue with repository summary
+- Note the format and content
+- Explain it will run automatically every day at 9 AM
+
+**Transition to next exercise:**
+
+> "Great! We've created our first workflow. In the next exercise, we'll use a better approach - the cloud agent - which produces much higher quality workflows by referencing official documentation. Let's see the difference."
+
+**Checkpoint:** "Everyone should have both workflow files committed and pushed. Raise your hand if you need help or if your workflow is still running."
 
 ---
 
@@ -444,7 +498,7 @@ git push
 
 **Say:**
 
-> "The wizard is great for simple workflows, but for more sophisticated ones, we want better quality. Let me introduce you to the **cloud agent approach**. This works BEFORE you run `gh aw init`, and it gives you much better results because it references the official documentation."
+> "The interactive CLI is great for simple workflows, but for more sophisticated ones, we want better quality. Let me introduce you to the **cloud agent approach**. This works BEFORE you run `gh aw init`, and it gives you much better results because it references the official documentation."
 
 ### CI Coach - Proactive Prevention (5 min)
 
@@ -454,10 +508,13 @@ git push
 
 **Step 1: Use cloud agent with documentation reference**
 
-```bash
-# Use @github/copilot with special prompt
-gh copilot suggest
-```
+**Say:** "We're going to use the cloud agent through your repository's web interface."
+
+**Guide participants:**
+
+1. Go to your repository on GitHub.com in your web browser
+2. Click on the **Agent** tab (should be in the navigation)
+3. In the agent interface, enter the following prompt:
 
 **Prompt:**
 
@@ -476,20 +533,21 @@ Use the pull_request trigger and comment on PRs using safe-outputs.
 
 **Say while AI generates:**
 
-> "Notice I'm giving the AI the URL to the creation guide. This means it can reference the exact patterns and best practices from the official docs. The quality is much better."
+> "Notice we're referencing the URL to the creation guide. This means the AI can reference the exact patterns and best practices from the official docs. The quality is much better than the simple interactive CLI approach."
 
 **Step 2: Save the generated workflow**
 
+**Say:** "The agent should generate both the .md and .lock.yml files. Save them to your repository."
+
 ```bash
-# Copy the output to a file
-code .github/workflows/ci-coach.yml
-# Paste the generated content
+# The agent will provide files to download/copy
+# Save as .github/workflows/ci-coach.md and .github/workflows/ci-coach.lock.yml
 ```
 
 **Step 3: Commit and push**
 
 ```bash
-git add .github/workflows/ci-coach.yml
+git add .github/workflows/ci-coach.md .github/workflows/ci-coach.lock.yml
 git commit -m "Add CI Coach workflow"
 git push
 ```
@@ -502,9 +560,10 @@ git push
 
 **Step 1: Create CI Doctor workflow**
 
-```bash
-gh copilot suggest
-```
+**Guide participants:**
+
+1. Stay in the **Agent** tab on GitHub.com
+2. Enter the following prompt:
 
 **Prompt:**
 
@@ -528,29 +587,28 @@ Use the workflow_run trigger with completed status and failure conclusion.
 **Step 2: Save and push**
 
 ```bash
-code .github/workflows/ci-doctor.yml
-# Paste content
-git add .github/workflows/ci-doctor.yml
+# Save the generated files
+git add .github/workflows/ci-doctor.md .github/workflows/ci-doctor.lock.yml
 git commit -m "Add CI Doctor workflow"
 git push
 ```
 
 **Step 3: Demonstrate the difference**
 
-**Show side-by-side:**
+**Show side-by-side (if you have examples):**
 
-- CLI wizard generated workflow (basic template)
+- Interactive CLI generated workflow (basic template)
 - Cloud agent generated workflow (references docs, more sophisticated)
 
 **Say:**
 
-> "See the difference? The cloud agent version has better error handling, follows best practices from the docs, and is more comprehensive. Same prompt effort, better results."
+> "See the difference? The cloud agent version has better error handling, follows best practices from the docs, and is more comprehensive. Same effort to create, much better results."
 
 ### Review & Discussion (2 min)
 
 **Key Takeaway:**
 
-> "Use the wizard for learning and simple workflows. Use the cloud agent with documentation reference for production-quality workflows."
+> "Use the interactive CLI for learning and simple workflows. Use the cloud agent with documentation reference for production-quality workflows."
 
 **Checkpoint:** "Everyone should have two new workflows: ci-coach and ci-doctor. Let's continue."
 
@@ -574,9 +632,10 @@ git push
 
 **Step 1: Use cloud agent**
 
-```bash
-gh copilot suggest
-```
+**Guide participants:**
+
+1. Stay in the **Agent** tab on GitHub.com
+2. Enter the following prompt:
 
 **Prompt:**
 
@@ -598,9 +657,8 @@ Use a daily schedule trigger and create PRs with safe-outputs.
 **Step 2: Save workflow**
 
 ```bash
-code .github/workflows/continuous-test-updates.yml
-# Paste content
-git add .github/workflows/continuous-test-updates.yml
+# Save the generated files
+git add .github/workflows/continuous-test-updates.md .github/workflows/continuous-test-updates.lock.yml
 git commit -m "Add continuous test updater"
 git push
 ```
@@ -704,17 +762,29 @@ git push
 
 **Screen Share:** VS Code with Copilot Chat panel
 
+**Say:**
+
+> "After initialization, we access the repository agent through VS Code Copilot Chat using the `/agents` command. This shows all available agents, and we select agentic-workflows."
+
 **Type in chat:**
 
 ```
-@agentic-workflows create a workflow that keeps the AGENTS.md file up to date.
+/agents
+```
+
+**Then select agentic-workflows agent from the UI**
+
+**Type the prompt:**
+
+```
+create a workflow that keeps the AGENTS.md file up to date.
 
 It should run weekly, review merged pull requests and updated source files since the last run, then open a pull request that keeps AGENTS.md accurate and current.
 ```
 
 **Say while AI works:**
 
-> "Notice the difference? I don't need to give it instructions on how to create a workflow or reference documentation. The agent already knows:
+> "Notice the difference with the repository agent? After selecting it from `/agents`, I don't need to give it instructions on how to create a workflow or reference documentation. The agent already knows:
 >
 > - Our repository structure
 > - Existing workflows
@@ -755,14 +825,14 @@ Quality & Sophistication
         |     ② Cloud Agent (reference docs)
         |    /
         |   /
-        |  ① CLI Wizard (basic templates)
+        |  ① Interactive CLI (basic templates)
         |_________________________→
                             Ease of Use
 ```
 
 **Say:**
 
-> "Start with the wizard to learn. Use cloud agent for one-off workflows. Initialize your repository and use the agent for ongoing workflow development. Each has its place."
+> "Start with the interactive CLI to learn. Use cloud agent for one-off workflows. Initialize your repository and use the agent for ongoing workflow development. Each has its place."
 
 **Checkpoint:** "Everyone should have `.github/aw/` directory and a workflow created via the repository agent."
 
@@ -788,10 +858,16 @@ Quality & Sophistication
 
 **Step 1: Use repository agent in VS Code**
 
-**Copilot Chat:**
+**In Copilot Chat, type:**
 
 ```
-@agentic-workflows I'm noticing that my issues are growing overwhelming with all these workflow-generated issues. Create a repository assistant workflow that:
+/agents
+```
+
+**Select agentic-workflows agent from the UI, then use this prompt:**
+
+```
+I'm noticing that my issues are growing overwhelming with all these workflow-generated issues. Create a repository assistant workflow that:
 
 1. Runs daily
 2. Reviews all open issues
@@ -832,10 +908,10 @@ git push
 
 > "Now let's add automatic triage for new issues. When someone creates an issue, the AI will analyze it, add labels, and suggest priority."
 
-**Copilot Chat:**
+**In Copilot Chat, type `/agents` and select agentic-workflows agent:**
 
 ```
-@agentic-workflows create an issue triage workflow that runs when issues are opened. It should:
+create an issue triage workflow that runs when issues are opened. It should:
 
 1. Analyze the issue content
 2. Determine if it's a bug, feature request, question, or enhancement
@@ -863,10 +939,10 @@ git push
 
 > "Issues are for actionable work. Discussions are for questions, ideas, and community interaction. Let's automate moving the right content to discussions."
 
-**Copilot Chat:**
+**In Copilot Chat, type `/agents` and select agentic-workflows agent:**
 
 ```
-@agentic-workflows create a workflow that identifies issues that should be discussions instead (questions, brainstorming, general inquiries) and posts a comment suggesting the issue be moved to discussions, with a link to create it in the right category.
+create a workflow that identifies issues that should be discussions instead (questions, brainstorming, general inquiries) and posts a comment suggesting the issue be moved to discussions, with a link to create it in the right category.
 
 This should respect that issues are for actionable items and discussions are for conversations.
 ```
@@ -1022,10 +1098,10 @@ Requirements:
 
 **Step 1: Add development workflow**
 
-**Copilot Chat:**
+**In Copilot Chat, type `/agents` and select agentic-workflows agent:**
 
 ```
-@agentic-workflows create a workflow that triggers when someone comments "/implement" on an issue. The workflow should:
+create a workflow that triggers when someone comments "/implement" on an issue. The workflow should:
 
 1. Read the issue description and any plans
 2. Create a new branch for the feature
@@ -1105,10 +1181,10 @@ cat .github/workflows/continuous-documentation-updates.yml
 
 **Step 3: Customize if needed**
 
-**Copilot Chat:**
+**In Copilot Chat, type `/agents` and select agentic-workflows agent:**
 
 ```
-@agentic-workflows modify the continuous-documentation-updates workflow to only check markdown files in the Adventures/ directory and create PRs labeled "documentation" and "auto-generated"
+modify the continuous-documentation-updates workflow to only check markdown files in the Adventures/ directory and create PRs labeled "documentation" and "auto-generated"
 ```
 
 **Step 4: Deploy**
@@ -1127,10 +1203,10 @@ git push
 
 **Step 1: Create workflow maintenance workflow**
 
-**Copilot Chat:**
+**In Copilot Chat, type `/agents` and select agentic-workflows agent:**
 
 ```
-@agentic-workflows create a workflow called "agentics-maintenance" that:
+create a workflow called "agentics-maintenance" that:
 
 1. Runs weekly
 2. Checks if any workflows in our repository were imported from githubnext/agentics
@@ -1172,10 +1248,10 @@ git push
 
 > "One more thing: let's validate our workflow files haven't gotten corrupted or out of sync."
 
-**Copilot Chat:**
+**In Copilot Chat, type `/agents` and select agentic-workflows agent:**
 
 ```
-@agentic-workflows create a workflow that runs on every push and validates:
+create a workflow that runs on every push and validates:
 
 1. All workflow YAML files are valid
 2. Workflows follow agentic best practices
@@ -1273,7 +1349,7 @@ All orchestrated by GitHub Agentic Workflows 🚀
    - Don't over-engineer early
 
 2. **Three Approaches, Three Quality Levels**
-   - CLI wizard: Learning and simple tasks
+   - Interactive CLI: Learning and simple tasks
    - Cloud agent: Production quality workflows
    - Repository agent: Context-aware excellence
 

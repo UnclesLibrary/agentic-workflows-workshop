@@ -2,7 +2,7 @@
 
 ## GitHub Agentic Workflows Workshop
 
-This document contains tested workflow prompts you can use in your repositories. Each prompt is designed to work with the different creation methods (CLI wizard, cloud agent, or repository agent).
+This document contains tested workflow prompts you can use in your repositories. Each prompt is designed to work with the different creation methods (interactive CLI, cloud agent, or repository agent).
 
 ---
 
@@ -34,10 +34,10 @@ Format the content to be scannable and actionable for team standups.
 
 ### 2. Weekly Repository Health Report
 
-**Use with:** Repository Agent
+**Use with:** Repository Agent (use `/agents` and select agentic-workflows agent)
 
 ```
-@agentic-workflows create a workflow that runs every Monday at 9 AM and generates a comprehensive repository health report as a new discussion post.
+create a workflow that runs every Monday at 9 AM and generates a comprehensive repository health report as a new discussion post.
 
 The report should include:
 - Code metrics: lines added/removed, file changes
@@ -114,10 +114,10 @@ Work with C#, JavaScript, Python, TypeScript, Java, and Go.
 
 ### 5. Code Quality Refactoring
 
-**Use with:** Repository Agent
+**Use with:** Repository Agent (use `/agents` and select agentic-workflows agent)
 
 ```
-@agentic-workflows create a workflow that runs twice weekly (Tuesday and Thursday) to improve code quality through refactoring.
+create a workflow that runs twice weekly (Tuesday and Thursday) to improve code quality through refactoring.
 
 Each run should:
 1. Scan the codebase for code quality issues:
@@ -174,10 +174,10 @@ Label PRs: "documentation", "auto-sync"
 
 ### 7. Dependency Security Auditor
 
-**Use with:** Repository Agent
+**Use with:** Repository Agent (use `/agents` and select agentic-workflows agent)
 
 ```
-@agentic-workflows create a workflow that runs weekly on Monday mornings to audit dependencies for security issues and maintainability.
+create a workflow that runs weekly on Monday mornings to audit dependencies for security issues and maintainability.
 
 The workflow should:
 1. Scan all dependency files (package.json, requirements.txt, *.csproj, go.mod, etc.)
@@ -274,10 +274,10 @@ Be diagnostic and solution-oriented.
 
 ### 10. Performance Regression Detector
 
-**Use with:** Repository Agent
+**Use with:** Repository Agent (use `/agents` and select agentic-workflows agent)
 
 ```
-@agentic-workflows create a workflow that runs on every PR to detect performance regressions.
+create a workflow that runs on every PR to detect performance regressions.
 
 The workflow should:
 1. Identify performance-critical code changes (database queries, algorithms, API endpoints)
@@ -338,10 +338,10 @@ Be friendly and help issue creators succeed.
 
 ### 12. Issue Planner with /plan Command
 
-**Use with:** Repository Agent
+**Use with:** Repository Agent (use `/agents` and select agentic-workflows agent)
 
 ```
-@agentic-workflows create a workflow that triggers when someone comments "/plan" on an issue.
+create a workflow that triggers when someone comments "/plan" on an issue.
 
 The workflow should:
 1. Read the issue description and all comments
@@ -368,10 +368,10 @@ The plan should be actionable and detailed enough for developers to start work i
 
 ### 13. Repository Assistant for Issue Management
 
-**Use with:** Repository Agent
+**Use with:** Repository Agent (use `/agents` and select agentic-workflows agent)
 
 ```
-@agentic-workflows create a repository assistant workflow that runs daily to manage and organize issues.
+create a repository assistant workflow that runs daily to manage and organize issues.
 
 The workflow should:
 1. Review all open issues and:
@@ -437,10 +437,10 @@ Use friendly, non-pushy language. We want to help, not nag.
 
 ### 15. AGENTS.md Maintenance
 
-**Use with:** Repository Agent
+**Use with:** Repository Agent (use `/agents` and select agentic-workflows agent)
 
 ```
-@agentic-workflows create a workflow that runs weekly to maintain the AGENTS.md file.
+create a workflow that runs weekly to maintain the AGENTS.md file.
 
 The workflow should:
 1. Review activity since last run:
@@ -540,10 +540,10 @@ Label issues: "legal", "compliance", "dependencies"
 
 ### 18. Dead Code Detector
 
-**Use with:** Repository Agent
+**Use with:** Repository Agent (use `/agents` and select agentic-workflows agent)
 
 ```
-@agentic-workflows create a workflow that runs monthly to detect and remove dead code.
+create a workflow that runs monthly to detect and remove dead code.
 
 The workflow should:
 1. Analyze the codebase to find:
@@ -611,10 +611,10 @@ Be extra welcoming and supportive. First impressions matter!
 
 ### 20. Code Review Learning Bot
 
-**Use with:** Repository Agent
+**Use with:** Repository Agent (use `/agents` and select agentic-workflows agent)
 
 ```
-@agentic-workflows create a workflow that helps team members improve their code review skills.
+create a workflow that helps team members improve their code review skills.
 
 Run when PRs are reviewed and:
 1. Analyze the review comments:
@@ -686,10 +686,10 @@ Be specific about what's wrong and how to fix it.
 
 ### 22. Audit Log Analyzer
 
-**Use with:** Repository Agent
+**Use with:** Repository Agent (use `/agents` and select agentic-workflows agent)
 
 ```
-@agentic-workflows create a workflow that runs daily to analyze repository audit logs for unusual activity.
+create a workflow that runs daily to analyze repository audit logs for unusual activity.
 
 The workflow should:
 1. Fetch audit log events from the last 24 hours:
@@ -759,10 +759,10 @@ Foster a welcoming and organized community space.
 
 ### 24. Release Notes Generator
 
-**Use with:** Repository Agent
+**Use with:** Repository Agent (use `/agents` and select agentic-workflows agent)
 
 ```
-@agentic-workflows create a workflow that generates release notes when a new tag is created.
+create a workflow that generates release notes when a new tag is created.
 
 When a version tag is pushed (v*.*.*), the workflow should:
 1. Collect changes since last release:
@@ -839,10 +839,10 @@ Be data-driven but human-focused.
 
 ### 26. Multi-Repo Orchestrator
 
-**Use with:** Repository Agent (requires setup)
+**Use with:** Repository Agent (use `/agents` and select agentic-workflows agent, requires setup)
 
 ```
-@agentic-workflows create a workflow that orchestrates changes across multiple related repositories.
+create a workflow that orchestrates changes across multiple related repositories.
 
 When an issue is labeled "multi-repo", the workflow should:
 1. Analyze the issue to determine which repos are affected
@@ -868,10 +868,10 @@ Add "orchestration" label. This enables coordinated multi-repo features.
 
 ### 27. Intelligent Rollback System
 
-**Use with:** Repository Agent
+**Use with:** Repository Agent (use `/agents` and select agentic-workflows agent)
 
 ```
-@agentic-workflows create a workflow that intelligently handles rollbacks when issues are detected in production.
+create a workflow that intelligently handles rollbacks when issues are detected in production.
 
 When an issue is labeled "production-incident" and "needs-rollback":
 1. Analyze the issue:

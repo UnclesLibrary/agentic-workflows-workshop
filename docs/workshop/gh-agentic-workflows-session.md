@@ -31,7 +31,7 @@ Using the multi-language CopilotAdventures repository, you'll create real workfl
 - Hands-on, practical exercises with immediate results
 - Progressive learning from simple to sophisticated
 - Work on your own repository (created from CopilotAdventures) you can continue using after
-- Learn three approaches: CLI wizard, cloud agent, and VS Code agent
+- Learn three approaches: interactive CLI, cloud agent, and VS Code agent
 
 **Prerequisites:**
 

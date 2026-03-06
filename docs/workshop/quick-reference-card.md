@@ -31,7 +31,7 @@ gh aw secrets bootstrap
 
 ## 📝 THREE CREATION METHODS
 
-### 1. CLI Wizard (Simple)
+### 1. Interactive CLI (Simple)
 
 ```bash
 gh aw create
@@ -41,7 +41,9 @@ gh aw create
 ### 2. Cloud Agent (Better)
 
 ```bash
-gh copilot suggest
+# Go to your repository on GitHub.com
+# Click the Agent tab
+# Use the agent to create workflows
 # Paste: "Create a workflow for GitHub Agentic Workflows
 # using https://raw.githubusercontent.com/github/gh-aw/main/create.md
 # The purpose is to [YOUR DESCRIPTION]"
@@ -52,7 +54,8 @@ gh copilot suggest
 ```bash
 gh aw init
 git add .github/aw/ && git commit -m "Init" && git push
-# Then use: @agentic-workflows in VS Code Copilot Chat
+# Open VS Code Copilot Chat, type /agents
+# Select agentic-workflows agent from the UI
 ```
 
 ---
@@ -205,7 +208,7 @@ gh auth refresh
 
 ## 🎓 EXERCISES ORDER
 
-1. ☑️ Daily standup status (CLI wizard)
+1. ☑️ Daily standup status (interactive CLI)
 2. ☑️ CI Coach (cloud agent)
 3. ☑️ CI Doctor (cloud agent)
 4. ☑️ Continuous test updates (cloud agent)

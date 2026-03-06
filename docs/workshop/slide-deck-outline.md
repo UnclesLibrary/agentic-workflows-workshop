@@ -207,16 +207,17 @@ Title: "Daily Standup - [date]"
 
 **Visual:** Staircase diagram
 
-**Level 1: CLI Wizard** (Good)
+**Level 1: Interactive CLI** (Good)
 
-- `gh aw create`
-- Guided prompts
-- Template substitution
+- `gh aw new`
+- Interactive guided prompts
+- Creates .md source and .lock.yml files
 - Great for learning
 
 **Level 2: Cloud Agent** (Better)
 
-- Reference documentation
+- Access via repository Agent tab in web browser
+- Reference documentation automatically
 - Higher quality results
 - Works before repository initialized
 - Production-ready
@@ -224,9 +225,9 @@ Title: "Daily Standup - [date]"
 **Level 3: Repository Agent** (Best)
 
 - After `gh aw init`
-- Context-aware
-- Understands your codebase
-- Highest quality results
+- Use `/agents` in VS Code Copilot Chat
+- Select agent from UI
+- Context-aware, highest quality results
 
 **Speaker Notes:**
 
