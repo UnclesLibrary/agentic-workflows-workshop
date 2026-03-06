@@ -22,6 +22,9 @@ gh auth login
 
 # Store Copilot token
 gh aw secrets set COPILOT_GITHUB_TOKEN --value "YOUR_TOKEN"
+
+# Verify secrets are configured
+gh aw secrets bootstrap
 ```
 
 ---
@@ -141,8 +144,8 @@ gh run watch
 # Manually trigger
 # (Go to Actions tab → Select workflow → Run workflow)
 
-# Check secrets
-gh aw secrets list
+# Verify secrets are configured
+gh aw secrets bootstrap
 ```
 
 ---

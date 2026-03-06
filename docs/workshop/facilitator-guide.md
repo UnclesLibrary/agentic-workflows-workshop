@@ -237,11 +237,14 @@ gh auth login
 
 **Screen Share:** GitHub web UI
 
-1. Go to github.com → New repository
-2. Name: `copilot-adventures-[yourname]`
-3. **Important:** Public or Private (your choice)
-4. **Do NOT** add README, .gitignore, or license
-5. Click "Create repository"
+**Important:** Ensure everyone is signed in to github.com first.
+
+1. Go to github.com → Click **New** (top left, next to "Top Repositories")
+2. **Choose owner:** Select your GitHub user account
+3. **Name:** `copilot-adventures-[yourname]`
+4. **Visibility:** Public or Private (your choice)
+5. **Do NOT** add README, .gitignore, or license
+6. Click "Create repository"
 
 **Step 2: Configure repository settings**
 
@@ -253,12 +256,14 @@ Navigate to Settings:
 - ✅ Allow all actions and reusable workflows
 - Workflow permissions: ✅ Read and write permissions
 - ✅ Allow GitHub Actions to create and approve pull requests
+- **Click "Save"** to apply changes
 
 **Enable Features:**
 
 - Settings → General → Features
 - ✅ Issues
 - ✅ Discussions
+- **Note:** Feature changes are applied immediately (no save button)
 
 **Say:** "These settings let our workflows do their magic. Without read/write permissions, they can't create issues or pull requests."
 
@@ -287,15 +292,17 @@ git push -u origin main
 
 **Screen Share:** GitHub Settings
 
-1. Settings (top-right profile) → Developer settings → Personal access tokens → Fine-grained tokens
-2. Generate new token
-3. Name: `Agentic Workflows Copilot Token`
-4. Expiration: 90 days (or workshop duration)
-5. Repository access: Select your `copilot-adventures-*` repository
-6. Permissions:
-   - **Copilot**: Read-only (request access if needed)
-7. Generate token
-8. **Copy token** (you won't see it again)
+1. Click **profile icon** (top-right) → **Settings** → **Developer settings** (bottom left of new page)
+2. **Personal access tokens** → **Fine-grained tokens** → Click "**Generate new token**"
+3. **Token name:** `Agentic Workflows Copilot Token`
+4. **Leave the defaults:**
+   - Resource owner: Your GitHub user account
+   - Expiration: 30 days
+   - Repository access: Public Repositories (only)
+5. **Permissions:** Scroll down → Click "**Add permission**" → Select **"Copilot Requests"**
+   - Explain: "This allows the token to make Copilot requests on your behalf, using your premium quota"
+6. Click "**Generate token**"
+7. **Copy token immediately** (won't see it again)
 
 ```bash
 # Store token in repository secrets
@@ -306,7 +313,7 @@ gh aw secrets set COPILOT_GITHUB_TOKEN --value "YOUR_TOKEN_HERE"
 
 > "Never share this token or commit it to your repository. It's stored securely in GitHub secrets."
 
-**Checkpoint:** "Run `gh aw secrets list` - you should see COPILOT_GITHUB_TOKEN listed."
+**Checkpoint:** "Run `gh aw secrets bootstrap` - should confirm that required secrets are configured."
 
 ### Setup Complete (1 min)
 
