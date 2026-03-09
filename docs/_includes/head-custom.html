@@ -1,0 +1,86 @@
+<!-- Add copy buttons to code blocks -->
+<style>
+    .code-container {
+        position: relative;
+    }
+
+    .copy-button {
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+        padding: 0.25rem 0.5rem;
+        background: #159957;
+        color: white;
+        border: none;
+        border-radius: 0.3rem;
+        cursor: pointer;
+        font-size: 0.8rem;
+        opacity: 0;
+        transition: opacity 0.2s;
+    }
+
+    .code-container:hover .copy-button {
+        opacity: 1;
+    }
+
+    .copy-button:hover {
+        background: #0d6f44;
+    }
+
+    .copy-button:active {
+        background: #0a5835;
+    }
+
+    .copy-button.copied {
+        background: #0366d6;
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Find all code blocks
+        const codeBlocks = document.querySelectorAll('pre');
+
+        codeBlocks.forEach(function (pre) {
+            // Skip if already wrapped
+            if (pre.parentElement.classList.contains('code-container')) {
+                return;
+            }
+
+            // Create wrapper
+            const wrapper = document.createElement('div');
+            wrapper.className = 'code-container';
+            pre.parentNode.insertBefore(wrapper, pre);
+            wrapper.appendChild(pre);
+
+            // Create copy button
+            const button = document.createElement('button');
+            button.className = 'copy-button';
+            button.textContent = 'Copy';
+            button.setAttribute('aria-label', 'Copy code to clipboard');
+
+            button.addEventListener('click', function () {
+                const code = pre.querySelector('code');
+                const text = code ? code.textContent : pre.textContent;
+
+                navigator.clipboard.writeText(text).then(function () {
+                    button.textContent = 'Copied!';
+                    button.classList.add('copied');
+
+                    setTimeout(function () {
+                        button.textContent = 'Copy';
+                        button.classList.remove('copied');
+                    }, 2000);
+                }).catch(function (err) {
+                    console.error('Failed to copy:', err);
+                    button.textContent = 'Error';
+                    setTimeout(function () {
+                        button.textContent = 'Copy';
+                    }, 2000);
+                });
+            });
+
+            wrapper.appendChild(button);
+        });
+    });
+</script>

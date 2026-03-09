@@ -1,0 +1,26 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+/* Enable word wrapping in code blocks to keep copy button visible */
+.code-container pre code,
+pre code {
+  white-space: pre-wrap !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+}
+
+/* Ensure code blocks don't overflow horizontally */
+.code-container pre,
+pre {
+  overflow-x: auto !important;
+  white-space: pre-wrap !important;
+  word-wrap: break-word !important;
+}
+
+/* Ensure the wrapper doesn't break the layout */
+.code-container {
+  position: relative;
+  margin-bottom: 1rem;
+}
