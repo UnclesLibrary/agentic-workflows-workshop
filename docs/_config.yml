@@ -25,6 +25,10 @@ titles_from_headings:
   strip_title: false
   collections: false
 
+# Include directories that would normally be excluded
+include:
+  - workshop/images
+
 # Exclude files from processing
 exclude:
   - README.md

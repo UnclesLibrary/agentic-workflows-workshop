@@ -99,7 +99,10 @@ gh auth login
 
 **Note:** If you're not signed in to github.com in your web browser, sign in first.
 
-1. Go to github.com → Click **New** (top left, next to "Top Repositories") - see [new-repository.png](../../new-repository.png)
+1. Go to github.com → Click **New** (top left, next to "Top Repositories")
+   
+   ![New repository button](images/new-repository.png)
+
 2. **Choose owner:** Select your GitHub user account
 3. **Name:** `copilot-adventures-[yourname]`
 4. **Visibility:** Public or Private (your choice)
@@ -152,7 +155,9 @@ git push -u origin main
    - **Repository access:** Public Repositories (only)
 6. **Permissions:** Scroll down and click "**Add permission**" → Select **"Copilot Requests"**
    - This allows the user of this token to make Copilot requests on your behalf, using your premium requests and calls
-   - See [generate-token.png](../../generate-token.png) for reference
+   
+   ![Generate token screenshot](images/generate-token.png)
+
 7. Click "**Generate token**" → **Copy it immediately** (you won't see it again)!
 
 ```bash
