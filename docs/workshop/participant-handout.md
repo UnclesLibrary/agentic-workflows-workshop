@@ -403,13 +403,37 @@ This continuous feedback strengthens your guardrails as you prepare for more aut
 
 ### Exercise 3: CI Doctor
 
-**Access the cloud agent:**
+**Why: Eliminating Context Switches and Constant Monitoring**
+
+Think about your team's current workflow when something breaks in CI:
+- Someone gets a notification (often at an inconvenient time)
+- They stop their current work to investigate
+- They dig through logs to find the root cause
+- They search for similar issues or fixes
+- They create a fix and submit it
+
+**The challenge:** This constant context switching is expensive. Every time someone stops feature work to fix a CI failure, you lose momentum, focus, and productivity. Your team can't scale if everyone needs to be on alert for CI failures.
+
+**What: An Automated CI Diagnostician**
+
+Instead of your team monitoring workflows and context switching when things break, the CI Doctor workflow:
+- **Activates automatically** when any workflow fails
+- **Analyzes failure logs** to identify root causes
+- **Searches repository history** for similar issues and past solutions
+- **Suggests remediation** in a PR ready for review
+- **Works 24/7** without human monitoring needed
+
+This shifts your team from **reactive firefighting** to **proactive pipeline maintenance**. The CI Doctor handles the diagnosis and suggests the fix - you just review and approve.
+
+**How: Create Your CI Doctor**
+
+**Method:** We'll use the cloud agent again for consistent, high-quality workflow generation.
+
+**Step 1: Create the workflow using the cloud agent**
 
 1. Go to your repository on GitHub.com in your web browser
 2. Click on the **Agent** tab
-3. Use the agent to create the workflow
-
-**Prompt:**
+3. Provide this prompt to the agent:
 
 ```
 Create a workflow for GitHub Agentic Workflows using https://raw.githubusercontent.com/github/gh-aw/main/create.md
@@ -428,13 +452,83 @@ The purpose of the workflow is to act as a CI Doctor that runs when a workflow_r
 Use the workflow_run trigger with completed status and failure conclusion.
 ```
 
-**Save the generated workflow to:** `.github/workflows/ci-doctor.md` and `.github/workflows/ci-doctor.lock.yml`
+**Step 2: Review and merge the generated PR**
+
+The cloud agent creates a PR with the CI Doctor workflow files.
+
+1. Go to your repository → **Pull Requests** tab
+2. Review the PR (titled something like "Add CI Doctor workflow")
+3. Verify the workflow files:
+   - `.github/workflows/ci-doctor.md`
+   - `.github/workflows/ci-doctor.lock.yml`
+4. **Merge the PR to main**
+
+**Step 3: Introduce a failing test to trigger the CI Doctor**
+
+To see the CI Doctor in action, we need a CI failure. Let's intentionally break a test:
+
+1. Create a new branch for the test failure:
 
 ```bash
-git add .github/workflows/ci-doctor.md .github/workflows/ci-doctor.lock.yml
-git commit -m "Add CI Doctor workflow"
-git push
+git checkout -b test/trigger-ci-doctor
 ```
+
+2. In your repository, navigate to `Solutions/JavaScript/The-Gridlock-Arena-of-Mythos/The-Gridlock-Arena-of-Mythos.test.js`
+
+3. Find the `testIsValidPosition()` function (around line 214)
+
+4. Add a failing assertion at the end of the function:
+
+```javascript
+// Add this line to intentionally fail the test
+assert(false, 'Intentional test failure to trigger CI Doctor');
+```
+
+5. Commit, push, and create a pull request:
+
+```bash
+git add Solutions/JavaScript/The-Gridlock-Arena-of-Mythos/The-Gridlock-Arena-of-Mythos.test.js
+git commit -m "Test: Intentionally break test to trigger CI Doctor"
+git push -u origin test/trigger-ci-doctor
+
+# Create a PR using GitHub CLI
+gh pr create --title "Test: Trigger CI Doctor" --body "Intentionally breaking a test to demonstrate the CI Doctor workflow"
+```
+
+**Step 4: Watch the CI Doctor work**
+
+1. Go to your repository → **Actions** tab
+2. You'll see the test workflow fail (red ❌)
+3. Shortly after, the CI Doctor workflow will trigger automatically
+4. Check your repository for:
+   - A new **issue** with diagnosis and suggested fixes, or
+   - A new **pull request** with a proposed fix
+
+**Step 5: Review the diagnosis**
+
+The CI Doctor will analyze the failure and might provide:
+- The exact line causing the failure
+- Context about what the test expected vs. what it got
+- Suggestions for fixing the issue
+- Links to similar past issues or documentation
+
+**Step 6: Fix and restore**
+
+Once you've seen the CI Doctor in action, close the test PR and clean up:
+
+```bash
+# Close the PR (from your main branch)
+git checkout main
+gh pr close test/trigger-ci-doctor
+
+# Delete the test branch
+git branch -D test/trigger-ci-doctor
+git push origin --delete test/trigger-ci-doctor
+```
+
+**Key Insight:** The CI Doctor eliminates the need for constant human monitoring of your pipelines. When failures occur, you get automated diagnosis and suggested fixes instead of scrambling to debug logs. This keeps your team focused on building features while maintaining pipeline health.
+
+Your DevOps guardrails are now stronger: you have visibility (Exercise 1), proactive coaching (Exercise 2), and automated diagnosis (Exercise 3). These workflows work together to keep your repository healthy with minimal human intervention.
 
 ---
 
