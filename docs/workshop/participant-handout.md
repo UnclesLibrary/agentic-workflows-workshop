@@ -310,13 +310,41 @@ Since it's scheduled for daily execution, trigger it manually to see it work:
 
 ### Exercise 2: CI Coach
 
-**Access the cloud agent:**
+**Why: Building the Backbone of Your DevOps Practice**
+
+Now that you have visibility into daily activity, let's focus on the backbone of your validation system: your **Continuous Integration (CI) pipeline**.
+
+Your CI pipeline is critical because it:
+- **Triggers on each change** - Every commit, every PR gets validated
+- **Validates each update** - Runs tests, checks code quality, enforces standards
+- **Deploys to customers** - When successful, it puts your work in users' hands
+
+As a team improving your DevOps practices, you need guardrails before letting AI run fully agentic. A healthy CI pipeline is non-negotiable because you want it to be:
+- **Quick enough** - Fast feedback means you can wait for results and fix issues immediately
+- **Consistent enough** - It's your single source of truth for "is this ready?"
+- **Complete enough** - Tests all scenarios so you ship with confidence
+
+**The challenge:** Teams often set up CI once and then the codebase evolves without the pipeline keeping pace. New dependencies get added, test patterns change, edge cases emerge - but the CI configuration stays static. You need constant validation that your pipeline is keeping up with your code.
+
+**What: A CI Coach That Has Your Back**
+
+The CI Coach workflow provides:
+- **Proactive guidance** - Catches issues before CI runs, saving time
+- **Evolutionary awareness** - Notices when your codebase has evolved beyond your current CI setup
+- **Continuous nudges** - Suggests improvements as patterns emerge
+- **Early warnings** - Spots potential failures before they happen
+
+Instead of waiting for CI to fail and then reacting, you get coaching on every PR that helps you maintain a world-class pipeline.
+
+**How: Create Your CI Coach**
+
+**Method:** We'll use the cloud agent (web browser) which produces better quality workflows by referencing documentation.
+
+**Step 1: Create the workflow using the cloud agent**
 
 1. Go to your repository on GitHub.com in your web browser
 2. Click on the **Agent** tab
-3. Use the agent to create the workflow
-
-**Prompt:**
+3. Provide this prompt to the agent:
 
 ```
 Create a workflow for GitHub Agentic Workflows using https://raw.githubusercontent.com/github/gh-aw/main/create.md
@@ -331,13 +359,45 @@ The purpose of the workflow is to act as a CI Coach that runs when a pull reques
 Use the pull_request trigger and comment on PRs using safe-outputs.
 ```
 
-**Save the generated workflow to:** `.github/workflows/ci-coach.md` and `.github/workflows/ci-coach.lock.yml`
+**Step 2: Review and merge the generated PR**
 
-```bash
-git add .github/workflows/ci-coach.md .github/workflows/ci-coach.lock.yml
-git commit -m "Add CI Coach workflow"
-git push
-```
+The cloud agent creates a **Pull Request** with the workflow files. 
+
+1. Go to your repository on GitHub → **Pull Requests** tab
+2. Review the PR created by the agent (titled something like "Add CI Coach workflow")
+3. Verify the workflow files look correct:
+   - `.github/workflows/ci-coach.md` (source workflow)
+   - `.github/workflows/ci-coach.lock.yml` (compiled workflow)
+4. **Merge the PR to main**
+
+**Step 3: Manually trigger the CI Coach**
+
+Since the CI Coach triggers on pull requests, let's test it manually first:
+
+1. Go to your repository → **Actions** tab
+2. Select **ci-coach** workflow (or similar name)
+3. Click **Run workflow** button → Run workflow
+4. Watch it execute
+
+**Step 4: Check the outcome**
+
+After the workflow completes, check your repository:
+
+**Question to consider:** Did you receive a:
+- 📝 **Pull Request** with suggested changes?
+- 💬 **Discussion** post with recommendations?
+- 🎯 **Issue** with analysis and suggestions?
+
+**Important:** You can configure how the CI Coach communicates with you! The workflow can be set to create PRs for actionable changes, issues for recommendations, or discussions for general feedback. 
+
+Which format do you prefer for receiving CI coaching feedback? Think about:
+- PRs = Immediate actionable changes ready to review
+- Issues = Trackable recommendations you can prioritize
+- Discussions = Conversational feedback for team consideration
+
+**Key Insight:** The CI Coach doesn't just check syntax—it analyzes your repository's testing infrastructure and identifies opportunities for improvement. It recognizes when your codebase has evolved beyond your current CI setup and provides specific, measurable recommendations to keep your pipeline aligned with your code.
+
+This continuous feedback strengthens your guardrails as you prepare for more autonomous workflows.
 
 ---
 
