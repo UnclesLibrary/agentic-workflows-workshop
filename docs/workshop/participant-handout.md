@@ -534,13 +534,36 @@ Your DevOps guardrails are now stronger: you have visibility (Exercise 1), proac
 
 ### Exercise 4: Continuous Test Updates
 
-**Access the cloud agent:**
+**Why: Building a Strong Test Foundation Over Time**
+
+Every engineering team knows tests are important, but writing comprehensive test coverage is:
+- **Time-consuming** - Tests often take longer to write than the code itself
+- **Tedious** - Repetition and boilerplate make it feel like busywork
+- **Deprioritized** - "We'll add tests later" often means "We'll never add tests"
+- **Overwhelming** - The idea of achieving 80%+ coverage feels impossible
+
+**The challenge:** Teams that try to "catch up" on test coverage in one big initiative often fail. Developers spend weeks writing tests instead of features, morale drops, and the initiative stalls. Meanwhile, untested code becomes technical debt that protects against faulty changes.
+
+**What: Gradual, Sustainable Test Growth**
+
+Instead of a massive test-writing initiative, the Continuous Test Updates workflow:
+- **Works incrementally** - Just 3 tests per day, every day
+- **Creates manageable PRs** - Easy to review, not overwhelming
+- **Learns from your patterns** - Follows existing test conventions in your repository
+- **Accumulates steadily** - 3 tests/day = ~1,000 tests/year
+- **Focuses strategically** - Identifies files with missing or inadequate coverage
+
+This approach transforms test coverage from a daunting task into a sustainable background process. You review and accept (or pivot on) small batches of tests, and over time your foundation becomes solid without disrupting feature work.
+
+**How: Create Your Continuous Test Updater**
+
+**Method:** We'll use the cloud agent for consistent quality.
+
+**Step 1: Create the workflow using the cloud agent**
 
 1. Go to your repository on GitHub.com in your web browser
 2. Click on the **Agent** tab
-3. Use the agent to create the workflow
-
-**Prompt:**
+3. Provide this prompt to the agent:
 
 ```
 Create a workflow for GitHub Agentic Workflows using https://raw.githubusercontent.com/github/gh-aw/main/create.md
@@ -557,13 +580,54 @@ The workflow should work across C#, JavaScript, and Python files in the Solution
 Use a daily schedule trigger and create PRs with safe-outputs.
 ```
 
-**Save the generated workflow to:** `.github/workflows/continuous-test-updates.md` and `.github/workflows/continuous-test-updates.lock.yml`
+**Step 2: Review and merge the generated PR**
 
-```bash
-git add .github/workflows/continuous-test-updates.md .github/workflows/continuous-test-updates.lock.yml
-git commit -m "Add continuous test updater"
-git push
-```
+The cloud agent creates a PR with the workflow files.
+
+1. Go to your repository → **Pull Requests** tab
+2. Review the PR (titled something like "Add Continuous Test Updates workflow")
+3. Verify the workflow files:
+   - `.github/workflows/continuous-test-updates.md`
+   - `.github/workflows/continuous-test-updates.lock.yml`
+4. **Merge the PR to main**
+
+**Step 3: Manually trigger the workflow**
+
+Since this runs on a daily schedule, trigger it manually to see it work immediately:
+
+1. Go to your repository → **Actions** tab
+2. Select the **continuous-test-updates** workflow (or similar name)
+3. Click **Run workflow** button → Run workflow
+4. Watch it execute (this may take a few minutes as it analyzes your codebase)
+
+**Step 4: Review the test suggestions**
+
+After the workflow completes, check your repository for:
+- A new **pull request** with proposed tests, or
+- A new **issue** with test recommendations
+
+The workflow will:
+- Identify specific files that need better test coverage
+- Generate tests that match your existing test patterns
+- Follow naming conventions already in your codebase
+- Create meaningful test cases (not just empty scaffolding)
+
+**Example output you might see:**
+- New tests for edge cases in existing functions
+- Tests for recently added code that lacks coverage
+- Validation tests for input handling
+- Integration tests for key workflows
+
+**Step 5: Review and iterate**
+
+When reviewing the proposed tests:
+- ✅ **Accept** tests that add value and follow good practices
+- 🔄 **Request changes** if tests need adjustment
+- ❌ **Close** if the tests aren't relevant (the workflow will try different files next time)
+
+**Key Insight:** By generating 3 tests per day, you build robust test coverage without disrupting feature development. Over weeks and months, this creates a strong validation foundation that protects against faulty changes and enables more confident automation. Better tests mean better AI outcomes - the more validation you have, the safer it is to let AI make autonomous changes.
+
+Your DevOps practices now include proactive quality improvement: visibility (Exercise 1), coaching (Exercise 2), diagnosis (Exercise 3), and continuous validation growth (Exercise 4). These workflows compound over time, each making your repository healthier and your team more productive.
 
 ---
 
