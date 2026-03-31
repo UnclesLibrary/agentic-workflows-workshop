@@ -631,25 +631,97 @@ Your DevOps practices now include proactive quality improvement: visibility (Exe
 
 ---
 
-### Exercise 5: Initialize Repository
+### Exercise 5: Initialize Repository Agent
+
+**Why: Bringing Automation into Your Development Workflow**
+
+So far, you've created workflows using:
+- **Interactive CLI** (Exercise 1) - Command-line, no repository context
+- **Cloud Agent** (Exercises 2-4) - Browser-based on GitHub.com, has repository context
+
+Both work well, but there's a workflow consideration: you need to **switch contexts** between your development environment and the browser to create workflows.
+
+**The challenge:** Most developers spend their time in their IDE (like VS Code), not on GitHub.com. When you need to create or modify a workflow, you have to:
+- Stop what you're coding
+- Open your browser
+- Navigate to GitHub.com
+- Use the agent tab
+- Copy the generated workflow back
+- Return to your IDE
+
+This context switching adds friction. The more friction in the process, the less likely you are to create automation when you need it.
+
+**What: Repository Agent in Your IDE**
+
+Initializing agentic workflows in your repository enables a new capability: **repository agents directly in VS Code Copilot Chat**. This means:
+- **Stay in your IDE** - No need to switch to the browser
+- **Faster workflow creation** - Agent is right where you're coding
+- **Immediate testing** - Generate, save, commit, and test without leaving VS Code
+- **Integrated development** - Part of your natural coding flow
+- **Same repository context** - Just like the cloud agent, but in your tool
+
+This removes friction from automation creation. When you think "I should automate this," you can do it immediately without breaking your flow.
+
+**How: Install Repository Tooling**
+
+**Method:** Initialize agentic workflows and commit the configuration as a PR.
+
+**Step 1: Create a branch and initialize**
 
 ```bash
+# Create a branch for this configuration
+git checkout -b config/initialize-agentic-workflows
+
 # Initialize agentic workflows in your repository
 gh aw init
 
 # This creates .github/aw/ directory with configuration
-# Commit the changes
-git add .github/aw/
-git commit -m "Initialize GitHub Agentic Workflows"
-git push
+# Review what was created
+ls -la .github/aw/
 ```
 
-**Now use VS Code Copilot Chat with repository agent:**
+**Step 2: Commit and create a PR**
 
-1. Open VS Code Copilot Chat
-2. Type `/agents` to view available agents
-3. Select the agentic-workflows agent from the UI
-4. Use this prompt:
+```bash
+# Add the configuration files
+git add .github/aw/
+
+# Commit with a clear message
+git commit -m "Initialize GitHub Agentic Workflows"
+
+# Push the branch
+git push -u origin config/initialize-agentic-workflows
+
+# Create a PR
+gh pr create --title "Initialize Agentic Workflows" --body "Setting up repository agent configuration to enable context-aware workflow creation in VS Code"
+```
+
+**Step 3: Review and merge the PR**
+
+1. Go to your repository → **Pull Requests** tab
+2. Review the PR with the `.github/aw/` configuration
+3. **Merge the PR to main**
+4. Return to your local main branch:
+
+```bash
+git checkout main
+git pull origin main
+```
+
+**Step 4: Test the repository agent in VS Code**
+
+Now you can use GitHub Copilot Chat with repository context directly in your IDE:
+
+1. **Create a new branch for the workflow:**
+
+```bash
+git checkout -b workflow/agents-md-maintenance
+```
+
+2. **Open VS Code Copilot Chat**
+3. Type `/agents` to view available agents
+4. Select the **agentic-workflows** agent from the UI
+5. Test it with this prompt:
 
 ```
 create a workflow that keeps the AGENTS.md file up to date.
@@ -657,7 +729,72 @@ create a workflow that keeps the AGENTS.md file up to date.
 It should run weekly, review merged pull requests and updated source files since the last run, then open a pull request that keeps AGENTS.md accurate and current.
 ```
 
-**Save and commit the generated workflow.**
+6. The agent generates the workflow right in VS Code with full repository context
+
+**Step 5: Compile, commit, and create PR**
+
+Notice how seamless this is - you stayed in your IDE the entire time:
+
+```bash
+# Save the generated workflow file (e.g., .github/workflows/agents-md-maintenance.md)
+# The agent will have created the .md file with your workflow
+
+# Compile the workflow to create the lock file
+gh aw compile .github/workflows/agents-md-maintenance.md
+
+# This creates .github/workflows/agents-md-maintenance.lock.yml
+
+# Add both files
+git add .github/workflows/agents-md-maintenance.md .github/workflows/agents-md-maintenance.lock.yml
+
+# Commit with a clear message
+git commit -m "Add AGENTS.md maintenance workflow"
+
+# Push the branch
+git push -u origin workflow/agents-md-maintenance
+
+# Create a PR
+gh pr create --title "Add AGENTS.md maintenance workflow" --body "Automated workflow to keep AGENTS.md documentation current with repository changes"
+```
+
+**Step 6: Review and merge the PR**
+
+1. Go to your repository → **Pull Requests** tab
+2. Review the PR with the new workflow
+3. **Merge the PR to main**
+4. Return to your local main branch:
+
+```bash
+git checkout main
+git pull origin main
+```
+
+**Step 7: Test the AGENTS.md updater**
+
+Now let's see the workflow in action. It should analyze all the recent PRs you've merged (CI Coach, CI Doctor, Test Updater, and the initialization) and update AGENTS.md accordingly.
+
+1. Go to your repository → **Actions** tab
+2. Select the **agents-md-maintenance** workflow (or similar name)
+3. Click **Run workflow** button → Run workflow
+4. Watch it execute
+
+The workflow will:
+- Review merged pull requests since the last run
+- Analyze the workflows you've added (daily-report, ci-coach, ci-doctor, continuous-test-updates)
+- Update AGENTS.md with descriptions of these new workflows
+- Create a PR with the updated documentation
+
+**Step 8: Review the generated documentation**
+
+After the workflow completes:
+1. Check for a new PR titled something like "Update AGENTS.md documentation"
+2. Review how the workflow documented your recent changes
+3. Notice it understands the purpose and context of each workflow you added
+4. Merge the PR to keep your documentation current
+
+**Key Insight:** The best automation is automation you actually create. By putting the agent directly in your development environment, you remove friction from the workflow creation process. When it's easy to automate, you automate more. This makes the repository agent the most practical method for ongoing workflow development.
+
+You've now unlocked IDE-integrated workflow creation - use it for all remaining exercises.
 
 ---
 
