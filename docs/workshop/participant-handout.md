@@ -798,7 +798,7 @@ You've now unlocked IDE-integrated workflow creation - use it for all remaining 
 
 ---
 
-### Exercise 7: Issue Triage (Reusing Proven Workflows)
+### Exercise 6: Issue Triage (Reusing Proven Workflows)
 
 **Why: Don't Build What Others Have Perfected**
 
@@ -932,7 +932,7 @@ After the workflow completes (usually ~1-2 minutes):
 
 ---
 
-### Exercise 8: Feature Planning with /plan
+### Exercise 7: Feature Planning with /plan
 
 1. **Create a new issue in GitHub:**
    - Title: `Add Ruby support to CopilotAdventures`
@@ -961,7 +961,7 @@ After the workflow completes (usually ~1-2 minutes):
 
 ---
 
-### Exercise 9: Implementation Workflow
+### Exercise 8: Implementation Workflow
 
 **Use VS Code Copilot Chat with repository agent:**
 
@@ -988,7 +988,7 @@ This enables iterative development triggered by humans.
 
 ---
 
-### Exercise 10: Reuse Workflows
+### Exercise 9: Reuse Workflows
 
 ```bash
 # Add a workflow from the community library
@@ -1005,7 +1005,7 @@ git push
 
 ---
 
-### Exercise 11: Workflow Maintenance
+### Exercise 10: Workflow Maintenance
 
 **Use VS Code Copilot Chat with repository agent:**
 
