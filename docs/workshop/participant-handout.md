@@ -1086,6 +1086,38 @@ After the workflow completes (usually ~1-2 minutes):
    - Add Ruby-specific README and setup instructions
    - Add Ruby to CI/CD pipeline for validation
 
+**Step 8 (Optional): Assign a sub-issue to Copilot for automatic implementation**
+
+Now that you have well-structured sub-issues, you can let Copilot implement them automatically:
+
+1. **Select one of the generated sub-issues:**
+   - Choose a sub-issue that's well-defined and has clear acceptance criteria
+   - Start with a simpler task for your first test
+
+2. **Assign to Copilot:**
+   - Open the sub-issue on GitHub
+   - In the issue comment section, type:
+     ```
+     assign: copilot
+     ```
+   - Post the comment
+
+3. **Watch Copilot Cloud work:**
+   - Copilot Cloud picks up the assignment automatically
+   - It reads the issue's Objective, Context, Approach, and Acceptance Criteria
+   - Creates a new branch for the implementation
+   - Writes the code based on the specification
+   - Runs tests if applicable
+   - Opens a PR with the implementation
+
+4. **Review the PR:**
+   - Go to **Pull Requests** tab
+   - Find the PR created by Copilot
+   - Review the implementation against the acceptance criteria
+   - Request changes if needed, or merge if it looks good
+
+**Note:** This demonstrates the full workflow automation cycle: issue triage → planning → automatic implementation. Each sub-issue becomes a self-contained work package that Copilot can execute autonomously.
+
 **Key Insight:** The `/plan` command transforms vague feature requests into executable work packages. Each sub-issue is ready for implementation, properly sequenced, and sized for a single PR. This workflow eliminates the manual planning overhead and ensures consistent quality in task breakdown across your team.
 
 ---
