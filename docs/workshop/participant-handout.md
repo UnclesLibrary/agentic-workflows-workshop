@@ -260,13 +260,7 @@ The command creates **three files**:
 
 1. **`daily-report.md`** - The editable source workflow in `.github/workflows/`
 2. **`daily-report.lock.yml`** - The compiled GitHub Actions workflow in `.github/workflows/`
-3. **`.gitattributes`** - Git configuration file in the repository root:
-   ```
-   .github/workflows/*.lock.yml linguist-generated=true merge=ours
-   ```
-   This configuration:
-   - Marks all `.lock.yml` files as generated (excluded from language statistics)
-   - Sets merge strategy to `ours` (automatically resolves merge conflicts by keeping your version)
+3. **`.gitattributes`** - Git configuration file in the repository root
 
 **Understanding the files:**
 
@@ -278,6 +272,14 @@ The command creates **three files**:
 - Contains a simplified version of your prompt
 - Is what GitHub Actions actually executes
 - Gets regenerated when you change the `.md` file
+
+**`.gitattributes`** contains:
+```
+.github/workflows/*.lock.yml linguist-generated=true merge=ours
+```
+This configuration:
+- Marks all `.lock.yml` files as generated (excluded from language statistics)
+- Sets merge strategy to `ours` (automatically resolves merge conflicts by keeping your version)
 
 📚 **Learn more:** [How Agentic Workflows Work](https://github.github.com/gh-aw/introduction/how-they-work/)
 
