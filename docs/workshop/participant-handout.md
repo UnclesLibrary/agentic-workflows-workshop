@@ -352,6 +352,100 @@ The workflow runs through **5 distinct phases**:
 
 ---
 
+### Exercise 1b: Upgrade Daily Report with Cloud Agent
+
+**Why: From Basic to Production-Quality**
+
+In Exercise 1, you used the interactive CLI to create a daily-report workflow. It works, but the prompt is minimal—just your one-line description. The cloud agent produces significantly better workflows because it can **download and reference the official documentation** while generating the workflow. This means richer prompts, better error handling, and more consistent output formatting.
+
+Think of it this way: the CLI is like writing a quick note from memory, while the cloud agent is like writing with the documentation open in front of you.
+
+**What: A Smarter Daily Report**
+
+By updating the existing workflow through the cloud agent, you'll get:
+- **Detailed, structured prompts** generated from documentation best practices
+- **Better formatting** for the daily summary issue
+- **More comprehensive coverage** of repository activity
+- **A Pull Request** with the changes, so you can compare before and after
+
+**How: Update Using the Cloud Agent**
+
+**Method:** We'll use the cloud agent (web browser) to upgrade the existing daily-report workflow.
+
+**Step 1: Navigate to the cloud agent**
+
+1. Go to your repository on GitHub.com in your web browser
+2. Click on the **Agent** tab (next to Code, Issues, Pull Requests, etc.)
+
+**⚠️ First-time setup — Configure billing for cloud resources:**
+
+If this is your first time using the cloud agent, you may see a **red banner** instructing you to configure billing for cloud resources and premium requests. To resolve this:
+
+1. Click the link in the banner, or navigate manually:
+   - Click your **profile icon** (top-right) → **Settings**
+   - In the left sidebar: **Copilot** → **Features**
+2. Scroll down to the **Billing** section
+3. Under **"Usage billed to"**, click **"Select billing entity"**
+4. Select the **organization** where you receive your Copilot license from
+
+![Copilot billing configuration](images/usage-billing.png)
+
+Once configured, return to your repository and click the **Agent** tab again.
+
+**Step 2: Provide the upgrade prompt**
+
+In the cloud agent chat, provide this prompt:
+
+```
+Update the existing daily-report workflow for GitHub Agentic Workflows using https://raw.githubusercontent.com/github/gh-aw/main/create.md. Create a Pull Request when you're done.
+
+The purpose of the workflow is to act as a daily report that helps team members keep up to date. It should:
+Run daily at 9 AM and create an issue with a summary of repository activity from past 24 hours. Include commits, pull requests, issues, and CI/CD failures.
+
+Use the schedule trigger and create issues using safe-outputs.
+```
+
+**Step 3: Review and merge the generated PR**
+
+The cloud agent creates a **Pull Request** with the updated workflow files.
+
+1. Go to your repository on GitHub → **Pull Requests** tab
+2. Review the PR created by the agent
+3. **Compare the changes:** Look at how the cloud agent improved the prompt in `.github/workflows/daily-report.md` compared to the basic version from Exercise 1
+4. Verify the workflow files:
+   - `.github/workflows/daily-report.md` (updated source workflow)
+   - `.github/workflows/daily-report.lock.yml` (recompiled workflow)
+5. **Merge the PR to main**
+
+**Step 4: Pull the changes locally**
+
+```bash
+git pull
+```
+
+**Step 5: Compare the improvement**
+
+Open `.github/workflows/daily-report.md` and notice how much richer the prompt is now. The cloud agent typically adds:
+- Structured output formatting instructions
+- Specific sections for commits, PRs, issues, and failures
+- Error handling guidance
+- Tone and style direction
+
+**Step 6: Trigger the upgraded workflow**
+
+Now let's run the improved version and compare the output:
+
+1. Go to your repository → **Actions** tab
+2. Select **daily-report** workflow
+3. Click **Run workflow** button → Run workflow
+4. Watch it execute through the same 5 phases (activation → agent → detection → safe_outputs → conclusion)
+
+The resulting issue should contain roughly the same information as before, but now the output is **better structured and formatted**. The cloud agent's richer prompt gives the AI clearer instructions on how to organize commits, PRs, issues, and failures—so the generated issue is more consistent and easier to read during standups.
+
+**Key Insight:** The same workflow purpose, but dramatically better instructions. This is why we use the cloud agent for all subsequent exercises—it consistently produces higher-quality workflows by referencing the official documentation during generation.
+
+---
+
 ### Exercise 2: CI Coach
 
 **Why: Building the Backbone of Your DevOps Practice**
@@ -382,13 +476,12 @@ Instead of waiting for CI to fail and then reacting, you get coaching on every P
 
 **How: Create Your CI Coach**
 
-**Method:** We'll use the cloud agent (web browser) which produces better quality workflows by referencing documentation.
+**Method:** We'll use the cloud agent again—you already know how to navigate there from Exercise 1b.
 
 **Step 1: Create the workflow using the cloud agent**
 
-1. Go to your repository on GitHub.com in your web browser
-2. Click on the **Agent** tab
-3. Provide this prompt to the agent:
+1. Go to your repository's **Agent** tab on GitHub.com (as you did in Exercise 1b)
+2. Provide this prompt to the agent:
 
 ```
 Create a workflow for GitHub Agentic Workflows using https://raw.githubusercontent.com/github/gh-aw/main/create.md
