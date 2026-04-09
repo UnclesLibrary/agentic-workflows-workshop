@@ -256,11 +256,12 @@ Run daily at 9 AM and create an issue with a summary of repository activity from
 
 **Step 2: Review the generated files**
 
-The command creates **three files**:
+The command creates **four files**:
 
 1. **`daily-report.md`** - The editable source workflow in `.github/workflows/`
 2. **`daily-report.lock.yml`** - The compiled GitHub Actions workflow in `.github/workflows/`
 3. **`.gitattributes`** - Git configuration file in the repository root
+4. **`.github/aw/actions-lock.json`** - GitHub Actions version lock file
 
 **Understanding the files:**
 
@@ -280,6 +281,23 @@ The command creates **three files**:
 This configuration:
 - Marks all `.lock.yml` files as generated (excluded from language statistics)
 - Sets merge strategy to `ours` (automatically resolves merge conflicts by keeping your version)
+
+**`.github/aw/actions-lock.json`** locks GitHub Actions to specific versions and commit SHAs:
+```json
+{
+  "entries": {
+    "actions/checkout@v6.0.2": {
+      "repo": "actions/checkout",
+      "version": "v6.0.2",
+      "sha": "de0fac2e4500dabe0009e67214ff5f5447ce83dd"
+    },
+    ...
+  }
+}
+```
+This file is a cache of resolved `action@version` → commit SHA mappings. During workflow compilation, the compiler tries to pin each action reference to an immutable commit SHA for security. The cache avoids problems when compiling with limited-permission tokens (like GitHub Copilot Coding Agent) that may not have access to resolve external repositories. Without this cache, compilation can be unstable—succeeding with a permissive token but failing when token access is restricted. Commit this file to version control so all contributors use consistent action references.
+
+📚 **Learn more:** [What is the actions-lock.json file?](https://github.github.com/gh-aw/reference/faq/#what-is-the-actions-lockjson-file)
 
 📚 **Learn more:** [How Agentic Workflows Work](https://github.github.com/gh-aw/introduction/how-they-work/)
 
