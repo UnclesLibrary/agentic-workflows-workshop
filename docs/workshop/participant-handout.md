@@ -161,12 +161,15 @@ git push -u origin main
 7. Click "**Generate token**" → **Copy it immediately** (you won't see it again)!
 
 ```bash
-# Store token (paste your actual token)
+# Store token as a repository action secret (paste your actual token)
 gh aw secrets set COPILOT_GITHUB_TOKEN --value "YOUR_TOKEN_HERE"
-
-# Verify required secrets are configured
-gh aw secrets bootstrap
 ```
+
+This command stores the PAT token as a **repository action secret** in your repository. GitHub Actions workflows will use this secret to authenticate Copilot requests on your behalf.
+
+**Verify the secret was created:**
+
+Go to `github.com/YOUR-USERNAME/copilot-adventures-YOURNAME/settings/secrets/actions` (replace with your actual username and repo name) and you should see **COPILOT_GITHUB_TOKEN** listed there.
 
 ---
 
