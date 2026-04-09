@@ -303,7 +303,7 @@ This file is a cache of resolved `action@version` → commit SHA mappings. Durin
 
 **Step 3: Observe the limitation**
 
-Open `.github/workflows/daily-report.lock.yml` and look at the prompt. It's very basic - just your description. This works, but we can achieve much better results.
+Open `.github/workflows/daily-report.md` and look at the prompt. It's very basic - just your description. This works, but we can achieve much better results.
 
 **Why this matters:** The quality of the AI's output depends heavily on the quality and detail of the instructions. The simple interactive CLI creates a minimal prompt, which means the workflow might:
 - Miss important details
@@ -316,12 +316,12 @@ Open `.github/workflows/daily-report.lock.yml` and look at the prompt. It's very
 **Step 4: Commit and test**
 
 ```bash
-# Review the generated files
+# Review the generated files or view in your code editor
 cat .github/workflows/daily-report.md
 cat .github/workflows/daily-report.lock.yml
 
-# Commit both files
-git add .github/workflows/daily-report.md .github/workflows/daily-report.lock.yml
+# Commit all files
+git add .
 git commit -m "Add daily report workflow (basic version)"
 git push
 ```
@@ -334,7 +334,21 @@ Since it's scheduled for daily execution, trigger it manually to see it work:
 2. Click **Actions** tab
 3. Select **daily-report** workflow
 4. Click **Run workflow** button
-5. Watch it execute and create an issue
+5. Watch it execute
+
+![Workflow execution progress](images/workflow-progress.png)
+
+**Understanding the workflow execution:**
+
+The workflow runs through **5 distinct phases**:
+
+1. **activation** (✅ ~16s) - Sets up the workflow environment, checks out the repository code, and prepares the runtime
+2. **agent** (✅ ~2m) - The AI agent analyzes your repository, reads commits, PRs, and issues from the past 24 hours, and formulates a summary
+3. **detection** (🟡 ~45s) - Validates the agent's output to ensure it's properly formatted and safe to process
+4. **safe_outputs** (⚪ pending) - **This is the automation step** that interprets the JSON output from the agent and creates the actual issue in your repository
+5. **conclusion** (⚪ pending) - Finalizes the workflow and cleans up
+
+**Important:** The agent itself doesn't directly create issues, PRs, or comments. Instead, it produces **structured JSON output** that describes what should be created. The `safe_outputs` step then interprets this JSON and performs the actual GitHub API calls to create the issue. This separation ensures security and allows for validation before any changes are made to your repository.
 
 ---
 
