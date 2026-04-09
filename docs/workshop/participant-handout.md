@@ -256,10 +256,17 @@ Run daily at 9 AM and create an issue with a summary of repository activity from
 
 **Step 2: Review the generated files**
 
-The command creates **two files** in `.github/workflows/`:
+The command creates **three files**:
 
-1. **`daily-report.md`** - The editable source workflow
-2. **`daily-report.lock.yml`** - The compiled GitHub Actions workflow
+1. **`daily-report.md`** - The editable source workflow in `.github/workflows/`
+2. **`daily-report.lock.yml`** - The compiled GitHub Actions workflow in `.github/workflows/`
+3. **`.gitattributes`** - Git configuration file in the repository root:
+   ```
+   .github/workflows/*.lock.yml linguist-generated=true merge=ours
+   ```
+   This configuration:
+   - Marks all `.lock.yml` files as generated (excluded from language statistics)
+   - Sets merge strategy to `ours` (automatically resolves merge conflicts by keeping your version)
 
 **Understanding the files:**
 
