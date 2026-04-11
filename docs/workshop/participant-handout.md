@@ -828,7 +828,6 @@ When creating a PR, use this structure:
 - [ ] Test on a feature branch first
 - [ ] Monitor first few runs after merge
 - [ ] Compare runtime before/after
-````
 
 ## Quality Standards
 
