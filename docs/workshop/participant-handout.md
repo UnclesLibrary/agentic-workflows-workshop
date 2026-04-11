@@ -171,6 +171,105 @@ This command stores the PAT token as a **repository action secret** in your repo
 
 Go to `github.com/YOUR-USERNAME/copilot-adventures-YOURNAME/settings/secrets/actions` (replace with your actual username and repo name) and you should see **COPILOT_GITHUB_TOKEN** listed there.
 
+**Create a Classic Token for CI Trigger:**
+
+Some agentic workflows (like the CI Coach) use `safe-outputs` to create **pull requests** that immediately trigger your CI pipeline. For this to work, the PR needs to be created with a token that has `repo` and `workflow` permissions — the fine-grained Copilot token above doesn't have these scopes.
+
+Without this classic token, workflows can still create issues, but PRs created by the agent won't automatically trigger CI runs. You'd have to manually close and reopen the PR to kick off CI.
+
+1. Go to **Settings** → **Developer settings** → **Personal access tokens** → **Tokens (classic)**
+2. Click "**Generate new token**" → Select **"Generate new token (classic)"**
+3. **Note:** `gh-aw-application`
+4. **Expiration:** 30 days
+5. **Select scopes:**
+   - ✅ **repo** (Full control of private repositories)
+   - ✅ **workflow** (Update GitHub Action workflows)
+
+   ![Generate classic token](images/generate-classic.png)
+
+6. Click "**Generate token**" → **Copy it immediately**!
+
+```bash
+# Store the classic token as a repository action secret
+gh aw secrets set GH_AW_CI_TRIGGER_TOKEN --value "YOUR_COPIED_TOKEN"
+```
+
+**Verify both secrets exist:**
+
+Go to `github.com/YOUR-USERNAME/copilot-adventures-YOURNAME/settings/secrets/actions` and you should now see both:
+- **COPILOT_GITHUB_TOKEN** — For Copilot AI requests
+- **GH_AW_CI_TRIGGER_TOKEN** — For creating PRs that trigger CI pipelines
+
+### 5. Add a CI Pipeline
+
+Before we start creating agentic workflows, let's add a basic CI pipeline that builds the projects. This pipeline will be used later by the CI Coach and CI Doctor workflows to analyze and optimize.
+
+Create a file at `.github/workflows/ci.yml` with the following content:
+
+```yaml
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-csharp:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      
+      - name: Build C# Solutions
+        run: dotnet build Solutions/CSharp/CopilotAdventures.sln
+  
+  build-javascript:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Validate JavaScript Files
+        run: |
+          node --check Solutions/JavaScript/*.js
+          echo "JavaScript syntax validation passed"
+  
+  build-python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      
+      - name: Validate Python Files
+        run: |
+          python -m py_compile Solutions/Python/*.py
+          echo "Python syntax validation passed"
+```
+
+Commit and push:
+
+```bash
+git add .github/workflows/ci.yml
+git commit -m "Add CI build pipeline"
+git push
+```
+
+This pipeline only builds and validates syntax — no tests yet. The CI Coach (Exercise 2) will later analyze this pipeline and suggest optimizations.
+
 ---
 
 ## 📝 Workshop Exercises
@@ -474,65 +573,347 @@ The CI Coach workflow provides:
 
 Instead of waiting for CI to fail and then reacting, you get coaching on every PR that helps you maintain a world-class pipeline.
 
-**How: Create Your CI Coach**
+**How: Create Your CI Coach Manually**
 
-**Method:** We'll use the cloud agent again—you already know how to navigate there from Exercise 1b.
+**Method:** This time we'll create the workflow file manually. This teaches you the anatomy of an agentic workflow—the frontmatter configuration and the natural language prompt—so you understand exactly what the CLI and cloud agent generate for you.
 
-**Step 1: Create the workflow using the cloud agent**
+**Step 1: Initialize Agentic Workflows**
 
-1. Go to your repository's **Agent** tab on GitHub.com (as you did in Exercise 1b)
-2. Provide this prompt to the agent:
+In Exercise 1, you created a workflow using `gh aw new`, which handled everything for you — including initialization. But now that we're creating a workflow manually, we first need to initialize the agentic workflows tooling in the repository. This sets up the `copilot-setup-steps.yml` file that configures the MCP server powering the AI agent during workflow execution.
 
-```
-Create a workflow for GitHub Agentic Workflows using https://raw.githubusercontent.com/github/gh-aw/main/create.md
+Without this initialization, the compiled workflow won't have the infrastructure it needs to run the agent and process `safe-outputs` (like creating pull requests).
 
-The purpose of the workflow is to act as a CI Coach that runs when a pull request is opened or updated. It should:
-1. Analyze the code changes for potential CI/CD issues
-2. Check if tests are likely to pass
-3. Look for common mistakes (missing dependencies, syntax issues, breaking changes)
-4. Comment on the PR with proactive suggestions before CI runs
-5. Be encouraging and helpful in tone
-
-Use the pull_request trigger and comment on PRs using safe-outputs.
+```bash
+gh aw init
 ```
 
-**Step 2: Review and merge the generated PR**
+This creates the `.github/aw/` directory with configuration files. You can review what was created:
 
-The cloud agent creates a **Pull Request** with the workflow files. 
+```bash
+ls -la .github/aw/
+```
+
+**Step 2: Create a branch**
+
+```bash
+git pull
+git checkout -b add-ci-coach
+```
+
+**Step 3: Create the workflow file**
+
+Create a new file at `.github/workflows/ci-coach.md` and paste the following content:
+
+````markdown
+---
+description: Daily CI optimization coach that analyzes GitHub Actions workflows for efficiency improvements and cost reduction opportunities
+
+on:
+  schedule:
+    - cron: daily
+  workflow_dispatch:
+
+network:
+  allowed:
+  - defaults
+  - dotnet
+  - node
+  - python
+  - rust
+  - java
+
+permissions: read-all
+
+tracker-id: ci-coach-daily
+
+tools:
+  github:
+    toolsets: [default]
+    min-integrity: none
+  bash: true
+  web-fetch:
+
+safe-outputs:
+  create-pull-request:
+    expires: 2d
+    title-prefix: "[ci-coach] "
+    allowed-files:
+      - .github/workflows/ci.yml
+    protected-files: allowed
+    github-token: ${{ secrets.GH_AW_CI_TRIGGER_TOKEN }}
+    github-token-for-extra-empty-commit: ${{ secrets.GH_AW_CI_TRIGGER_TOKEN }}
+timeout-minutes: 30
+source: githubnext/agentics/workflows/ci-coach.md@b0e9cfd3a20372ce7fe0462bb7bbca2272df4a88
+engine: copilot
+---
+
+# CI Optimization Coach
+
+You are the CI Optimization Coach, an expert system that analyzes GitHub Actions workflow performance to identify opportunities for optimization, efficiency improvements, and cost reduction.
+
+## Mission
+
+Analyze CI workflows daily to identify concrete optimization opportunities that can make the test suite more efficient while minimizing costs and runtime.
+
+## Current Context
+
+- **Repository**: ${{ github.repository }}
+- **Run Number**: #${{ github.run_number }}
+
+## Analysis Framework
+
+### Phase 1: Discovery (5 minutes)
+
+Identify all GitHub Actions workflows in the repository:
+
+1. **Find workflow files**: List all `.github/workflows/*.yml` and `.github/workflows/*.yaml` files
+2. **Identify CI workflows**: Focus on workflows that run tests, builds, or lints
+3. **Gather recent runs**: Use GitHub API to fetch the last 50-100 runs for each workflow
+4. **Collect metrics**:
+   - Average runtime per workflow
+   - Success/failure rates
+   - Job-level timing data
+   - Cache usage patterns
+   - Artifact sizes
+
+### Phase 2: Analysis (10 minutes)
+
+Analyze the collected data for optimization opportunities:
+
+1. **Job Parallelization**
+   - Are independent jobs running sequentially?
+   - Can the critical path be reduced?
+   - Are matrix jobs balanced?
+
+2. **Cache Optimization**
+   - Are dependencies cached effectively?
+   - What's the cache hit rate?
+   - Are cache keys optimal?
+
+3. **Test Suite Structure**
+   - Is test execution balanced?
+   - Are slow tests identified?
+   - Can tests run in parallel?
+
+4. **Resource Sizing**
+   - Are job timeouts appropriate?
+   - Are runner types optimal?
+   - Are jobs failing due to timeouts?
+
+5. **Artifact Management**
+   - Are artifacts necessary?
+   - Are retention periods appropriate?
+   - Can artifact sizes be reduced?
+
+6. **Conditional Execution**
+   - Can some jobs skip on certain conditions?
+   - Are path filters used effectively?
+   - Can workflow dispatch reduce unnecessary runs?
+
+### Phase 3: Prioritization (5 minutes)
+
+For each potential optimization, assess:
+
+- **Impact**: How much time/cost savings? (High/Medium/Low)
+- **Risk**: What's the risk of breaking something? (Low/Medium/High)
+- **Effort**: How hard is it to implement? (Low/Medium/High)
+
+Focus on **high impact + low risk + low-to-medium effort** optimizations.
+
+### Phase 4: Implementation (8 minutes)
+
+If you identify valuable improvements:
+
+1. **Make focused changes** to workflow files:
+   - Use the `edit` tool for precise modifications
+   - Add inline comments explaining the optimization
+   - Keep changes minimal and surgical
+
+2. **Document the changes** thoroughly in the PR description
+
+3. **Create a pull request** with clear rationale
+
+### Phase 5: No Changes Path (2 minutes)
+
+If no significant improvements are found:
+
+1. Note the analysis results
+2. Use the `noop` safe output tool to report "CI workflows analyzed - no optimization opportunities found"
+3. Exit gracefully
+
+## Optimization Patterns
+
+### Common High-Value Optimizations
+
+1. **Parallel Job Execution**
+   ```yaml
+   # Before: Sequential
+   test:
+     needs: [build]
+   lint:
+     needs: [build]
+   
+   # After: Parallel
+   test:
+     needs: [build]
+   lint:
+     needs: [build]  # Both run in parallel after build
+   ```
+
+2. **Matrix Balancing**
+   ```yaml
+   # Balance test distribution across matrix jobs
+   matrix:
+     group: [1, 2, 3, 4]  # Evenly distributed
+   ```
+
+3. **Path Filtering**
+   ```yaml
+   on:
+     push:
+       paths:
+         - 'src/**'
+         - 'tests/**'
+   ```
+
+### Anti-Patterns to Avoid
+
+❌ **NEVER modify test code to hide failures**
+- Don't add `|| true` to failing tests
+- Don't suppress error output
+- Don't skip failing tests without justification
+
+❌ **Don't over-optimize**
+- Avoid changes that save <2% of runtime
+- Don't sacrifice clarity for minor gains
+- Don't add complexity without clear benefit
+
+## Pull Request Template
+
+When creating a PR, use this structure:
+
+````markdown
+### Summary
+
+[Brief description of optimization and expected benefit]
+
+### Optimizations
+
+#### 1. [Optimization Name]
+
+**Type**: [Parallelization/Cache/Testing/Resource/Artifact/Conditional]
+**Impact**: Estimated [X minutes/Y%] savings per run
+**Risk**: Low/Medium/High
+
+**Changes**:
+- [Description of specific changes made]
+
+**Rationale**: [Why this improves efficiency]
+
+<details>
+<summary><b>Detailed Analysis</b></summary>
+
+[Metrics, before/after comparisons, supporting data]
+
+</details>
+
+### Expected Impact
+
+- **Time Savings**: ~X minutes per run
+- **Cost Reduction**: ~$Y per month (estimated based on 50 runs/month)
+- **Risk Level**: Low/Medium/High
+
+### Testing Recommendations
+
+- [ ] Review workflow syntax
+- [ ] Test on a feature branch first
+- [ ] Monitor first few runs after merge
+- [ ] Compare runtime before/after
+````
+
+## Quality Standards
+
+- **Evidence-based**: All recommendations based on actual data
+- **Minimal changes**: Surgical improvements, not rewrites
+- **Low risk**: Prioritize safe optimizations
+- **Measurable**: Include metrics to verify improvements
+- **Reversible**: Changes should be easy to roll back
+
+## Success Criteria
+
+✅ Analyzed all GitHub Actions workflows
+✅ Collected metrics from recent runs
+✅ Identified optimization opportunities OR confirmed workflows are well-optimized
+✅ If changes proposed: Created PR with clear rationale and expected impact
+✅ If no changes: Used noop tool to report analysis complete
+✅ Completed analysis in under 30 minutes
+
+Begin your analysis now. Identify CI workflows, analyze their performance, and either propose optimizations through a pull request or report that no improvements are needed.
+````
+
+**Understanding the workflow structure:**
+
+Take a moment to study what you just pasted. The file has two parts:
+
+1. **Frontmatter** (between the `---` markers) — This is the configuration that tells GitHub Actions *how* to run the workflow:
+   - `on:` — Triggers: runs daily on a schedule and can be triggered manually via `workflow_dispatch`
+   - `permissions: read-all` — The agent can read everything but can only write through `safe-outputs`
+   - `tools:` — What the agent can use: GitHub API, bash, and web-fetch
+   - `safe-outputs:` — The agent's output creates a pull request (not direct changes), with a `[ci-coach]` title prefix
+   - `engine: copilot` — Uses GitHub Copilot as the AI engine
+
+2. **Natural language prompt** (after the second `---`) — This is what the AI agent actually reads and follows. Notice how detailed and structured it is compared to the basic prompt from Exercise 1. The 5-phase framework, optimization patterns, anti-patterns, and PR template all guide the agent toward consistent, high-quality results.
+
+**Step 4: Compile the workflow**
+
+```bash
+gh aw compile ci-coach
+```
+
+This generates `.github/workflows/ci-coach.lock.yml` — the compiled GitHub Actions workflow that will actually execute.
+
+**Step 5: Commit and push**
+
+```bash
+git add .
+git commit -m "Add CI Coach optimization workflow"
+git push -u origin add-ci-coach
+```
+
+**Step 6: Create a PR and merge**
+
+```bash
+gh pr create --title "Add CI Coach workflow" --body "Daily CI optimization coach that analyzes workflows for efficiency improvements and cost reduction opportunities"
+```
 
 1. Go to your repository on GitHub → **Pull Requests** tab
-2. Review the PR created by the agent (titled something like "Add CI Coach workflow")
-3. Verify the workflow files look correct:
-   - `.github/workflows/ci-coach.md` (source workflow)
-   - `.github/workflows/ci-coach.lock.yml` (compiled workflow)
-4. **Merge the PR to main**
+2. Review the PR to verify the workflow files look correct:
+   - `.github/workflows/ci-coach.md` (the source workflow you created)
+   - `.github/workflows/ci-coach.lock.yml` (the compiled workflow)
+3. **Approve and merge the PR to main**
 
-**Step 3: Manually trigger the CI Coach**
+**Step 7: Pull main and trigger the workflow**
 
-Since the CI Coach triggers on pull requests, let's test it manually first:
+```bash
+git checkout main
+git pull
+```
 
 1. Go to your repository → **Actions** tab
-2. Select **ci-coach** workflow (or similar name)
+2. Select **ci-coach** workflow
 3. Click **Run workflow** button → Run workflow
-4. Watch it execute
+4. Watch it execute through the 5 phases (activation → agent → detection → safe_outputs → conclusion)
 
-**Step 4: Check the outcome**
+**Step 8: Check the outcome**
 
-After the workflow completes, check your repository:
+After the workflow completes, check your repository for a new **Pull Request** with the `[ci-coach]` prefix. The CI Coach will have:
+- Analyzed your existing GitHub Actions workflows
+- Identified optimization opportunities (if any)
+- Created a PR with proposed changes and detailed rationale
 
-**Question to consider:** Did you receive a:
-- 📝 **Pull Request** with suggested changes?
-- 💬 **Discussion** post with recommendations?
-- 🎯 **Issue** with analysis and suggestions?
+If no optimizations were found, the workflow exits gracefully via the `noop` path — which is a perfectly valid outcome for a well-configured repository.
 
-**Important:** You can configure how the CI Coach communicates with you! The workflow can be set to create PRs for actionable changes, issues for recommendations, or discussions for general feedback. 
-
-Which format do you prefer for receiving CI coaching feedback? Think about:
-- PRs = Immediate actionable changes ready to review
-- Issues = Trackable recommendations you can prioritize
-- Discussions = Conversational feedback for team consideration
-
-**Key Insight:** The CI Coach doesn't just check syntax—it analyzes your repository's testing infrastructure and identifies opportunities for improvement. It recognizes when your codebase has evolved beyond your current CI setup and provides specific, measurable recommendations to keep your pipeline aligned with your code.
+**Key Insight:** By creating this workflow manually, you now understand exactly what the CLI and cloud agent generate behind the scenes. Every agentic workflow is just a markdown file with frontmatter configuration + a natural language prompt. The quality of the prompt directly determines the quality of the agent's output — which is why the detailed 5-phase framework produces better results than a one-line description.
 
 This continuous feedback strengthens your guardrails as you prepare for more autonomous workflows.
 
@@ -768,97 +1149,41 @@ Your DevOps practices now include proactive quality improvement: visibility (Exe
 
 ---
 
-### Exercise 5: Initialize Repository Agent
+### Exercise 5: Create Workflow with Repository Agent
 
-**Why: Bringing Automation into Your Development Workflow**
+**Why: Bringing Automation into Your IDE**
 
 So far, you've created workflows using:
-- **Interactive CLI** (Exercise 1) - Command-line, no repository context
-- **Cloud Agent** (Exercises 2-4) - Browser-based on GitHub.com, has repository context
+- **Interactive CLI** (Exercise 1) - Quick, but produces minimal prompts
+- **Manual creation** (Exercise 2) - Full control, but requires knowing the workflow format
+- **Cloud Agent** (Exercises 1b, 3-4) - Good quality, but requires switching to the browser
 
-Both work well, but there's a workflow consideration: you need to **switch contexts** between your development environment and the browser to create workflows.
+**The challenge:** Most developers spend their time in their IDE (like VS Code), not on GitHub.com. Every time you switch to the browser to create a workflow, you lose focus and momentum.
 
-**The challenge:** Most developers spend their time in their IDE (like VS Code), not on GitHub.com. When you need to create or modify a workflow, you have to:
-- Stop what you're coding
-- Open your browser
-- Navigate to GitHub.com
-- Use the agent tab
-- Copy the generated workflow back
-- Return to your IDE
+**What: Repository Agent in VS Code**
 
-This context switching adds friction. The more friction in the process, the less likely you are to create automation when you need it.
+Remember the `gh aw init` you ran in Exercise 2? That configured the MCP server and repository agent. Now you can use **GitHub Copilot Chat directly in VS Code** to create agentic workflows — no browser needed.
 
-**What: Repository Agent in Your IDE**
-
-Initializing agentic workflows in your repository enables a new capability: **repository agents directly in VS Code Copilot Chat**. This means:
-- **Stay in your IDE** - No need to switch to the browser
+This means:
+- **Stay in your IDE** - No context switching
 - **Faster workflow creation** - Agent is right where you're coding
-- **Immediate testing** - Generate, save, commit, and test without leaving VS Code
-- **Integrated development** - Part of your natural coding flow
-- **Same repository context** - Just like the cloud agent, but in your tool
+- **Immediate testing** - Generate, compile, commit, and test without leaving VS Code
+- **Full repository context** - The agent understands your codebase
 
-This removes friction from automation creation. When you think "I should automate this," you can do it immediately without breaking your flow.
+**How: Create a Workflow from VS Code**
 
-**How: Install Repository Tooling**
-
-**Method:** Initialize agentic workflows and commit the configuration as a PR.
-
-**Step 1: Create a branch and initialize**
-
-```bash
-# Create a branch for this configuration
-git checkout -b config/initialize-agentic-workflows
-
-# Initialize agentic workflows in your repository
-gh aw init
-
-# This creates .github/aw/ directory with configuration
-# Review what was created
-ls -la .github/aw/
-```
-
-**Step 2: Commit and create a PR**
-
-```bash
-# Add the configuration files
-git add .github/aw/
-
-# Commit with a clear message
-git commit -m "Initialize GitHub Agentic Workflows"
-
-# Push the branch
-git push -u origin config/initialize-agentic-workflows
-
-# Create a PR
-gh pr create --title "Initialize Agentic Workflows" --body "Setting up repository agent configuration to enable context-aware workflow creation in VS Code"
-```
-
-**Step 3: Review and merge the PR**
-
-1. Go to your repository → **Pull Requests** tab
-2. Review the PR with the `.github/aw/` configuration
-3. **Merge the PR to main**
-4. Return to your local main branch:
-
-```bash
-git checkout main
-git pull origin main
-```
-
-**Step 4: Test the repository agent in VS Code**
-
-Now you can use GitHub Copilot Chat with repository context directly in your IDE:
-
-1. **Create a new branch for the workflow:**
+**Step 1: Create a branch**
 
 ```bash
 git checkout -b workflow/agents-md-maintenance
 ```
 
-2. **Open VS Code Copilot Chat**
-3. Type `/agents` to view available agents
-4. Select the **agentic-workflows** agent from the UI
-5. Test it with this prompt:
+**Step 2: Use the repository agent in VS Code**
+
+1. **Open VS Code Copilot Chat**
+2. Type `/agents` to view available agents
+3. Select the **agentic-workflows** agent from the UI
+4. Provide this prompt:
 
 ```
 create a workflow that keeps the AGENTS.md file up to date.
@@ -866,9 +1191,9 @@ create a workflow that keeps the AGENTS.md file up to date.
 It should run weekly, review merged pull requests and updated source files since the last run, then open a pull request that keeps AGENTS.md accurate and current.
 ```
 
-6. The agent generates the workflow right in VS Code with full repository context
+5. The agent generates the workflow right in VS Code with full repository context
 
-**Step 5: Compile, commit, and create PR**
+**Step 3: Compile, commit, and create PR**
 
 Notice how seamless this is - you stayed in your IDE the entire time:
 
@@ -894,7 +1219,7 @@ git push -u origin workflow/agents-md-maintenance
 gh pr create --title "Add AGENTS.md maintenance workflow" --body "Automated workflow to keep AGENTS.md documentation current with repository changes"
 ```
 
-**Step 6: Review and merge the PR**
+**Step 4: Review and merge the PR**
 
 1. Go to your repository → **Pull Requests** tab
 2. Review the PR with the new workflow
@@ -906,7 +1231,7 @@ git checkout main
 git pull origin main
 ```
 
-**Step 7: Test the AGENTS.md updater**
+**Step 5: Test the AGENTS.md updater**
 
 Now let's see the workflow in action. It should analyze all the recent PRs you've merged (CI Coach, CI Doctor, Test Updater, and the initialization) and update AGENTS.md accordingly.
 
@@ -921,7 +1246,7 @@ The workflow will:
 - Update AGENTS.md with descriptions of these new workflows
 - Create a PR with the updated documentation
 
-**Step 8: Review the generated documentation**
+**Step 6: Review the generated documentation**
 
 After the workflow completes:
 1. Check for a new PR titled something like "Update AGENTS.md documentation"
@@ -939,7 +1264,7 @@ You've now unlocked IDE-integrated workflow creation - use it for all remaining 
 
 **Why: Don't Build What Others Have Perfected**
 
-You've built several workflows from scratch (Exercises 1-5), which is essential for learning the fundamentals. But in real practice, why reinvent the wheel when proven solutions exist?
+You've built several workflows from scratch (Exercises 1-4) and from your IDE (Exercise 5), which is essential for learning the fundamentals. But in real practice, why reinvent the wheel when proven solutions exist?
 
 **The challenge:** Building workflows from scratch means:
 - **Trial and error** - You'll discover edge cases the hard way
