@@ -643,7 +643,6 @@ safe-outputs:
     github-token: ${{ secrets.GH_AW_CI_TRIGGER_TOKEN }}
     github-token-for-extra-empty-commit: ${{ secrets.GH_AW_CI_TRIGGER_TOKEN }}
 timeout-minutes: 30
-source: githubnext/agentics/workflows/ci-coach.md@b0e9cfd3a20372ce7fe0462bb7bbca2272df4a88
 engine: copilot
 ---
 
