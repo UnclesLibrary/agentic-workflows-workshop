@@ -68,7 +68,7 @@ gh extension install github/gh-aw
 
 # Verify installation
 gh aw --version
-# Should show version 0.51.5 or higher
+# Should show version v0.68.1 or higher
 ```
 
 ### 3. Authenticate with GitHub
@@ -1652,7 +1652,7 @@ This approach transforms test coverage from a daunting task into a sustainable b
 3. Provide this prompt to the agent:
 
 ```
-Create a workflow for GitHub Agentic Workflows using https://raw.githubusercontent.com/github/gh-aw/main/create.md
+Create a workflow for GitHub Agentic Workflows using https://raw.githubusercontent.com/github/gh-aw/main/create.md, create a pr when your done
 
 The purpose of the workflow is to continuously improve test coverage. It should run daily and:
 1. Analyze the codebase to find 3 files with missing or inadequate tests
@@ -1712,6 +1712,12 @@ When reviewing the proposed tests:
 - ❌ **Close** if the tests aren't relevant (the workflow will try different files next time)
 
 **Key Insight:** By generating 3 tests per day, you build robust test coverage without disrupting feature development. Over weeks and months, this creates a strong validation foundation that protects against faulty changes and enables more confident automation. Better tests mean better AI outcomes - the more validation you have, the safer it is to let AI make autonomous changes.
+
+> **⚠️ Note on coding style:** The workflow generates tests based on the existing test patterns in your repository. If your codebase has consistent test conventions, the generated tests will follow that style. However, if you have a legacy repository with mixed testing styles (different frameworks, naming conventions, assertion libraries), the agent may produce inconsistent results — mirroring the inconsistency it finds. In that case, consider:
+> - **Refactoring existing tests** to a consistent style before enabling this workflow
+> - **Adding strong `AGENTS.md` instructions** that specify exactly how you want tests structured (framework, naming conventions, assertion style, file organization)
+>
+> Clear guidance in `AGENTS.md` acts as a style guide for the AI — the more specific your instructions, the more consistent the output.
 
 Your DevOps practices now include proactive quality improvement: visibility (Exercise 1), coaching (Exercise 2), diagnosis (Exercise 3), and continuous validation growth (Exercise 4). These workflows compound over time, each making your repository healthier and your team more productive.
 
