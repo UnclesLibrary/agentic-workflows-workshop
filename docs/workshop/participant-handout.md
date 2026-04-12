@@ -1729,8 +1729,8 @@ Your DevOps practices now include proactive quality improvement: visibility (Exe
 
 So far, you've created workflows using:
 - **Interactive CLI** (Exercise 1) - Quick, but produces minimal prompts
-- **Manual creation** (Exercise 2) - Full control, but requires knowing the workflow format
-- **Cloud Agent** (Exercises 1b, 3-4) - Good quality, but requires switching to the browser
+- **Manual creation** (Exercises 2-3) - Full control, but requires knowing the workflow format
+- **Cloud Agent** (Exercises 1b, 4) - Good quality, but requires switching to the browser
 
 **The challenge:** Most developers spend their time in their IDE (like VS Code), not on GitHub.com. Every time you switch to the browser to create a workflow, you lose focus and momentum.
 
@@ -1749,6 +1749,8 @@ This means:
 **Step 1: Create a branch**
 
 ```bash
+git checkout main
+git pull
 git checkout -b workflow/agents-md-maintenance
 ```
 
@@ -1765,6 +1767,8 @@ create a workflow that keeps the AGENTS.md file up to date.
 It should run weekly, review merged pull requests and updated source files since the last run, then open a pull request that keeps AGENTS.md accurate and current.
 ```
 
+When copilot asks to get some web reference choose allow. Same goes if it wants to compile the workflow.
+
 5. The agent generates the workflow right in VS Code with full repository context
 
 **Step 3: Compile, commit, and create PR**
@@ -1776,12 +1780,12 @@ Notice how seamless this is - you stayed in your IDE the entire time:
 # The agent will have created the .md file with your workflow
 
 # Compile the workflow to create the lock file
-gh aw compile .github/workflows/agents-md-maintenance.md
+gh aw compile agents-md-maintenance
 
 # This creates .github/workflows/agents-md-maintenance.lock.yml
 
 # Add both files
-git add .github/workflows/agents-md-maintenance.md .github/workflows/agents-md-maintenance.lock.yml
+git add .
 
 # Commit with a clear message
 git commit -m "Add AGENTS.md maintenance workflow"
