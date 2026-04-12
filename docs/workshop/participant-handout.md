@@ -1834,8 +1834,6 @@ After the workflow completes:
 
 **Key Insight:** The best automation is automation you actually create. By putting the agent directly in your development environment, you remove friction from the workflow creation process. When it's easy to automate, you automate more. This makes the repository agent the most practical method for ongoing workflow development.
 
-You've now unlocked IDE-integrated workflow creation - use it for all remaining exercises.
-
 ---
 
 ### Exercise 6: Issue Triage (Reusing Proven Workflows)
