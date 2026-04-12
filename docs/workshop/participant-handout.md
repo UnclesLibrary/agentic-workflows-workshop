@@ -1904,6 +1904,8 @@ The `issue-triage` workflow from githubnext/agentics is a focused, battle-tested
 **Step 1: Create a branch for the addition**
 
 ```bash
+git checkout main
+git pull
 git checkout -b workflow/add-issue-triage
 ```
 
@@ -1929,7 +1931,7 @@ cat .github/workflows/issue-triage.md
 
 ```bash
 # Add both the source and compiled workflow
-git add .github/workflows/issue-triage.md .github/workflows/issue-triage.lock.yml
+git add .
 
 # Commit with context
 git commit -m "Add issue-triage workflow from githubnext/agentics"
@@ -1965,7 +1967,7 @@ Let's trigger the issue-triage workflow:
      ```
 
 2. **Watch GitHub pick it up:**
-   - Notice the 👀 eye emoji icons appear on the issue (this indicates the workflow is processing it)
+   - Notice the 👀 eye emoji icons appear on the issue — this can take 1-2 minutes as the pipeline needs to start up (this indicates the workflow is processing it)
    - Go to **Actions** tab
    - Find the "issue-triage" workflow run
    - Observe how it processes the new issue
