@@ -1,0 +1,21 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Preview GitHub Pages",
+      "type": "node",
+      "request": "launch",
+      "preLaunchTask": "Start Jekyll Server",
+      "serverReadyAction": {
+        "pattern": "Server address: (https?://[0-9a-z.-]+:[0-9]+)",
+        "uriFormat": "http://localhost:4000",
+        "action": "openExternally"
+      },
+      "presentation": {
+        "hidden": false,
+        "group": "Jekyll",
+        "order": 1
+      }
+    }
+  ]
+}
