@@ -2049,6 +2049,8 @@ The `plan` workflow from githubnext/agentics is a specialized planning assistant
 **Step 1: Create a branch for the addition**
 
 ```bash
+git checkout main
+git pull
 git checkout -b workflow/add-plan
 ```
 
@@ -2074,7 +2076,7 @@ cat .github/workflows/plan.md
 
 ```bash
 # Add both the source and compiled workflow
-git add .github/workflows/plan.md .github/workflows/plan.lock.yml
+git add .
 
 # Commit with context
 git commit -m "Add plan workflow from githubnext/agentics"
