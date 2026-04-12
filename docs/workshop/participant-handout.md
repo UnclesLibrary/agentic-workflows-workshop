@@ -1765,6 +1765,13 @@ git checkout -b workflow/agents-md-maintenance
 create a workflow that keeps the AGENTS.md file up to date.
 
 It should run weekly, review merged pull requests and updated source files since the last run, then open a pull request that keeps AGENTS.md accurate and current.
+
+make sure to allow the agents.md file, as it is an a protected file
+---
+    allowed-files: ["AGENTS.md"]
+    protected-files: fallback-to-issue
+---
+
 ```
 
 When copilot asks to get some web reference choose allow. Same goes if it wants to compile the workflow.
@@ -1822,15 +1829,23 @@ The workflow will:
 - Review merged pull requests since the last run
 - Analyze the workflows you've added (daily-report, ci-coach, ci-doctor, continuous-test-updates)
 - Update AGENTS.md with descriptions of these new workflows
-- Create a PR with the updated documentation
 
-**Step 6: Review the generated documentation**
+Because `AGENTS.md` is a **protected file** (we configured `protected-files: fallback-to-issue` in the workflow), the agent **cannot directly create a PR** that modifies it. Instead, it falls back to creating an **issue** with the proposed changes.
+
+**Step 6: Review the generated issue and create the PR**
 
 After the workflow completes:
-1. Check for a new PR titled something like "Update AGENTS.md documentation"
-2. Review how the workflow documented your recent changes
-3. Notice it understands the purpose and context of each workflow you added
-4. Merge the PR to keep your documentation current
+1. Check your repository's **Issues** tab for a new issue created by the workflow
+2. The issue will contain the proposed AGENTS.md updates — a summary of the workflows you've added and how the file should be updated
+3. At the bottom of the issue, click the **link to create a PR** from the issue content
+
+   ![Create PR from issue](images/pr-from-issue.png)
+
+4. Review the PR with the proposed AGENTS.md changes
+5. Notice how the workflow documented your recent changes — it understands the purpose and context of each workflow you added
+6. **Merge the PR** to update AGENTS.md
+
+> **💡 Why protected files matter:** This is the `fallback-to-issue` pattern in action. By marking `AGENTS.md` as a protected file, you ensure a human always reviews changes to critical documentation before they're merged. The workflow does the analysis work; you make the final call.
 
 **Key Insight:** The best automation is automation you actually create. By putting the agent directly in your development environment, you remove friction from the workflow creation process. When it's easy to automate, you automate more. This makes the repository agent the most practical method for ongoing workflow development.
 
