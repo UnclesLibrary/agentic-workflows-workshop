@@ -39,7 +39,17 @@ CopilotDevDays-AgenticWorkflows/
         ├── README.md            # Workshop overview
         ├── gh-agentic-workflows-session.md      # Event organizer materials
         ├── facilitator-guide.md                  # Facilitator instructions
-        ├── participant-handout.md                # Student reference guide
+        ├── participant-handout.md                # Student reference guide (overview/index)
+        ├── participant-handout-setup.md          # Setup guide (prerequisites, installation)
+        ├── participant-handout-exercise1.md      # Exercise 1: Daily Standup Status
+        ├── participant-handout-exercise2.md      # Exercise 2: CI Coach
+        ├── participant-handout-exercise3.md      # Exercise 3: CI Doctor
+        ├── participant-handout-exercise4.md      # Exercise 4: Continuous Test Updates
+        ├── participant-handout-exercise5.md      # Exercise 5: Repository Agent
+        ├── participant-handout-exercise6.md      # Exercise 6: Issue Triage
+        ├── participant-handout-exercise7.md      # Exercise 7: Feature Planning
+        ├── participant-handout-exercise8.md      # Exercise 8: Explore on Your Own
+        ├── participant-handout-resources.md      # Commands, resources & next steps
         ├── example-workflow-prompts.md           # 28 tested workflow prompts
         ├── slide-deck-outline.md                 # Presentation structure
         └── quick-reference-card.md               # One-page cheat sheet

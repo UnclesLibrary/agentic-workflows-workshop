@@ -29,13 +29,17 @@ This directory contains comprehensive materials for delivering the "From Code to
 
 ### For Participants
 
-- **[participant-handout.md](participant-handout.md)** - Student reference guide containing:
-  - All setup commands
-  - Exercise instructions
-  - Workflow creation patterns
-  - Troubleshooting guide
-  - Resource links
-  - Quick command reference
+- **[participant-handout.md](participant-handout.md)** - Student reference guide (overview & navigation), split into individual pages:
+  - [Setup Guide](participant-handout-setup.md) - Prerequisites, installation, repository setup
+  - [Exercise 1: Daily Standup Status](participant-handout-exercise1.md) - Interactive CLI + Cloud Agent
+  - [Exercise 2: CI Coach](participant-handout-exercise2.md) - Manual workflow creation
+  - [Exercise 3: CI Doctor](participant-handout-exercise3.md) - CI failure diagnostician
+  - [Exercise 4: Continuous Test Updates](participant-handout-exercise4.md) - Cloud Agent workflow
+  - [Exercise 5: Repository Agent](participant-handout-exercise5.md) - VS Code Agent workflow
+  - [Exercise 6: Issue Triage](participant-handout-exercise6.md) - Community workflow reuse
+  - [Exercise 7: Feature Planning](participant-handout-exercise7.md) - `/plan` command
+  - [Exercise 8: Explore on Your Own](participant-handout-exercise8.md) - Open challenges
+  - [Commands, Resources & Next Steps](participant-handout-resources.md) - Reference & troubleshooting
 
 ### Resources
 
