@@ -241,7 +241,7 @@ jobs:
       
       - name: Validate JavaScript Files
         run: |
-          node --check Solutions/JavaScript/*.js
+          for f in Solutions/JavaScript/*.js; do node --check "$f"; done
           echo "JavaScript syntax validation passed"
   
   build-python:
@@ -998,7 +998,7 @@ permissions:
 
 network: defaults
 
-engine: claude
+engine: copilot
 
 safe-outputs:
   create-issue:
@@ -1020,7 +1020,6 @@ safe-outputs:
 tools:
   cache-memory: true
   web-fetch:
-  web-search:
   github:
     toolsets: [default, actions]  # default: context, repos, issues, pull_requests; actions: workflow logs and artifacts
 
@@ -1538,8 +1537,16 @@ git checkout -b test/trigger-ci-doctor
 
 Create a syntax error in a JavaScript file:
 
+**Bash (Mac/Linux):**
+
 ```bash
-echo "this is not valid javascript %%%" >> Solutions/JavaScript/The-Clockwork-Town-of-Tempora/The-Clockwork-Town-of-Tempora.js
+echo "this is not valid javascript %%%" >> Solutions/JavaScript/The-Clockwork-Town-of-Tempora.js
+```
+
+**PowerShell (Windows):**
+
+```powershell
+Add-Content -Path .\Solutions\JavaScript\The-Clockwork-Town-of-Tempora.js -Value "this is not valid javascript %%%"
 ```
 
 Commit, push, and create a PR:
@@ -1563,9 +1570,40 @@ gh pr create --title "Test: Trigger CI Doctor" --body "Intentionally breaking a 
    - Specific recommended fixes with file paths
    - Prevention tips
 
-**Step 8: Clean up**
+> **💡 Tip: Automatic triggering on CI failure**
+>
+> The workflow we created uses `label_command` — you manually add the `ci-doctor` label to trigger it. If you want the CI Doctor to run **automatically** whenever CI fails, replace the `on:` trigger in `ci-doctor.md` with:
+>
+> ```yaml
+> on:
+>   label_command:
+>     name: ci-doctor
+>     events: [pull_request]
+>   workflow_run:
+>     workflows: ["CI"]
+>     types: [completed]
+>     conclusions: [failure]
+> ```
+>
+> This keeps the label-based on-demand trigger **and** adds automatic activation whenever the CI workflow completes with a failure. After changing the trigger, recompile with `gh aw compile ci-doctor`, commit, and push.
 
-Once you've seen the CI Doctor in action:
+**Step 8: Clean up or fix**
+
+Once you've reviewed the CI Doctor's diagnosis, you have two options:
+
+**Option A: Ask Copilot to fix it**
+
+Instead of fixing the issue manually, you can comment on the PR:
+
+```
+@copilot fix the issue
+```
+
+Copilot will pick up the CI Doctor's diagnostic comment and use it as context to create a fix commit directly on the PR branch. This isn't the CI Doctor workflow — it's GitHub Copilot's built-in PR capability, but it leverages the diagnosis the CI Doctor already posted.
+
+**Option B: Clean up the test branch**
+
+If you just want to discard the intentional breakage:
 
 ```bash
 git checkout main
