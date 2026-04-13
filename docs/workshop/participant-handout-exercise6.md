@@ -15,9 +15,9 @@ You've built several workflows from scratch (Exercises 1-4) and from your IDE (E
 - **Reinventing** - Others have solved these problems and worked out the kinks
 
 **The opportunity:** The community has built and battle-tested workflows for common needs. Key sources include:
-- **https://github.com/githubnext/agentics/** - Curated, production-ready workflows
-- **https://github.com/github/gh-aw** - Official examples and patterns
-- **https://github.com/github/awesome-copilot** - Community contributions
+- [**https://github.com/githubnext/agentics/**](https://github.com/githubnext/agentics/) - Curated, production-ready workflows
+- [**https://github.com/github/gh-aw**](https://github.com/github/gh-aw) - Official examples and patterns
+- [**https://github.com/github/awesome-copilot**](https://github.com/github/awesome-copilot) - Community contributions
 
 **What: Issue Triage - Intelligent First Responder**
 
