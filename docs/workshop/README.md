@@ -18,7 +18,7 @@ This directory contains comprehensive materials for delivering the "From Code to
 
 ### For Facilitators
 
-- **[facilitator-guide.md](facilitator-guide.md)** - Detailed 2-hour workshop guide with:
+- **[facilitator-guide.md](facilitator-guide.md)** - Detailed 2.5+ hour workshop guide with:
   - Minute-by-minute timeline
   - Setup instructions
   - Live coding demonstrations
@@ -60,7 +60,7 @@ This directory contains comprehensive materials for delivering the "From Code to
 ## 🎯 Workshop Overview
 
 **Title:** From Code to Automation: Mastering GitHub Agentic Workflows  
-**Duration:** 2 hours  
+**Duration:** 2.5+ hours  
 **Format:** Hands-on, progressive complexity  
 **Prerequisites:** GitHub account, GitHub Copilot access, laptop
 
@@ -76,7 +76,8 @@ This directory contains comprehensive materials for delivering the "From Code to
               ├─ Repository management (assistant, triage)
               ├─ Planning automation (/plan command)
               └─ Advanced patterns (reuse, maintenance)
-1:45-2:00   Wrap-up → Retrospective, Q&A, next steps
+2:00-2:15   Wrap-up → Retrospective
+2:15-2:30   Q&A and Open Discussion
 ```
 
 ## 🚀 Quick Start
@@ -104,7 +105,7 @@ This directory contains comprehensive materials for delivering the "From Code to
 
 **Total Pages:** ~100+ pages of content  
 **Preparation Time:** 3-4 hours for first-time facilitators  
-**Delivery Time:** 2 hours standard, extensible to 3+ hours  
+**Delivery Time:** 2.5+ hours standard, extensible to 3+ hours  
 **Exercise Count:** 11 progressive hands-on exercises  
 **Workflow Patterns:** 28 ready-to-use examples
 

@@ -50,7 +50,7 @@
 
 **Speaker Notes:**
 
-- This is what you'll build in 2 hours
+- This is what you'll build in 2.5+ hours
 - On YOUR repository that you can keep using
 - Real automation with immediate value
 

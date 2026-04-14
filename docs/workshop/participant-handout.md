@@ -1,7 +1,7 @@
 # GitHub Agentic Workflows Workshop - Participant Handout
 
 **Workshop:** From Code to Automation: Mastering GitHub Agentic Workflows  
-**Duration:** 2 hours  
+**Duration:** 2.5+ hours  
 **Date:** [Your Event Date]
 
 ---

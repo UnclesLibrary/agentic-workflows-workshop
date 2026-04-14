@@ -5,7 +5,7 @@
 <div align="center">
 
 ![GitHub Copilot Dev Days](https://img.shields.io/badge/GitHub-Copilot%20Dev%20Days-blue)
-![Workshop Duration](https://img.shields.io/badge/Duration-2%20hours-green)
+![Workshop Duration](https://img.shields.io/badge/Duration-2.5%2B%20hours-green)
 ![Skill Level](https://img.shields.io/badge/Level-Beginner%20to%20Advanced-orange)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
 
@@ -23,7 +23,7 @@
 
 ## 🎯 Overview
 
-This repository contains comprehensive, battle-tested materials for delivering a 2-hour hands-on workshop teaching **GitHub Agentic Workflows**—a revolutionary way to automate repository maintenance, continuous improvement, and development workflows using natural language and AI.
+This repository contains comprehensive, battle-tested materials for delivering a 2.5+ hour hands-on workshop teaching **GitHub Agentic Workflows**—a revolutionary way to automate repository maintenance, continuous improvement, and development workflows using natural language and AI.
 
 Perfect for **GitHub Copilot Dev Days** events, user groups, conferences, and team training sessions.
 
@@ -111,7 +111,7 @@ Perfect for **GitHub Copilot Dev Days** events, user groups, conferences, and te
 
 **Total Pages:** ~100+ pages of content  
 **Preparation Time:** 3-4 hours for first-time facilitators  
-**Delivery Time:** 2 hours standard, extensible to 3+ hours  
+**Delivery Time:** 2.5+ hours standard, extensible to 3+ hours  
 **Exercise Count:** 11 progressive hands-on exercises  
 **Workflow Patterns:** 28 ready-to-use examples
 
@@ -150,21 +150,22 @@ These materials are released under the MIT License. You are free to:
 
 ## 🌟 Workshop Format
 
-### Standard 2-Hour Format
+### Standard 2.5-Hour Format
 
 ```
 0:00-0:15   Introduction & Concepts
 0:15-0:30   Setup (CLI, repository, authentication)
-0:30-1:45   Progressive Hands-on Exercises
+0:30-2:00   Progressive Hands-on Exercises
               → Daily operations (standup reports)
               → CI/CD enhancement (coach & doctor)
               → Continuous improvement (tests, docs)
               → Issue management (triage, planning)
               → Advanced patterns (reuse, maintenance)
-1:45-2:00   Wrap-up, Retrospective, Q&A
+2:00-2:15   Wrap-up, Retrospective
+2:15-2:30   Q&A and Open Discussion
 ```
 
-### Dual Track Option (2.5-3 Hours)
+### Dual Track Option (3-3.5 Hours)
 
 - **Beginner Track** - Guided templates, understanding concepts
 - **Advanced Track** - Build from scratch, sophisticated patterns
@@ -305,7 +306,7 @@ This workshop is designed for the global **GitHub Copilot Dev Days** initiative:
 ## 📅 Version History
 
 - **v1.0** (March 2026) - Initial release for Copilot Dev Days 2026
-  - Complete 2-hour workshop
+  - Complete 2.5+ hour workshop
   - 7 comprehensive materials
   - 28 workflow patterns
   - Tested with pilot groups

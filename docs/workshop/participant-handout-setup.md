@@ -1,7 +1,7 @@
 # Setup Guide
 
 **Workshop:** From Code to Automation: Mastering GitHub Agentic Workflows  
-**Duration:** 2 hours  
+**Duration:** 2.5+ hours  
 **Date:** [Your Event Date]
 
 > 📖 **Navigation:** [← Back to Overview](participant-handout.md) | [Next: Exercise 1 →](participant-handout-exercise1.md)

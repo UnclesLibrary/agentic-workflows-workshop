@@ -40,7 +40,7 @@ Using the multi-language CopilotAdventures repository, you'll create real workfl
 - GitHub Copilot access (trial available)
 - Basic familiarity with Git and GitHub
 
-**Duration:** 2 hours
+**Duration:** 2.5+ hours
 
 **What to Bring:**
 Your curiosity and a willingness to let AI help you automate the boring stuff! Leave with a new repository in your GitHub account containing working agentic workflows and the knowledge to build more.

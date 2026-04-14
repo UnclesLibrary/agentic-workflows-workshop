@@ -2,7 +2,7 @@
 
 ## "From Code to Automation: Mastering GitHub Agentic Workflows"
 
-**Total Duration:** 2 hours  
+**Total Duration:** 2.5+ hours  
 **Format:** Hands-on workshop with live coding  
 **Difficulty:** Beginner to Intermediate
 
