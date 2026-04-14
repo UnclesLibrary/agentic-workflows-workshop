@@ -41,9 +41,9 @@ jobs:
           mkdir -p _deploy/workshop/images
           # Copy site assets (CSS, etc.)
           cp -r docs/_site/assets _deploy/ 2>/dev/null || true
-          # Copy landing page
-          cp docs/_site/index.html _deploy/
-          # Copy participant handout pages only
+          # Use participant handout as landing page
+          cp docs/_site/workshop/participant-handout.html _deploy/index.html
+          # Copy participant handout pages
           cp docs/_site/workshop/participant-handout.html _deploy/workshop/
           cp docs/_site/workshop/participant-handout-setup.html _deploy/workshop/
           cp docs/_site/workshop/participant-handout-exercise1.html _deploy/workshop/
