@@ -1,5 +1,6 @@
 title: GitHub Agentic Workflows Workshop
 description: Complete workshop materials for teaching GitHub Agentic Workflows at community events
+baseurl: /agentic-workflows-workshop
 theme: jekyll-theme-cayman
 markdown: kramdown
 
