@@ -35,3 +35,4 @@ exclude:
   - LICENSE
   - CONTRIBUTING.md
   - .github/
+  - vendor/
