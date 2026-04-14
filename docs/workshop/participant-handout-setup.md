@@ -2,7 +2,7 @@
 
 **Workshop:** From Code to Automation: Mastering GitHub Agentic Workflows  
 **Duration:** 2.5+ hours  
-**Date:** [Your Event Date]
+**Date:** April 15, 2026
 
 > 📖 **Navigation:** [← Back to Overview](participant-handout.md) | [Next: Exercise 1 →](participant-handout-exercise1.md)
 

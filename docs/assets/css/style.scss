@@ -3,6 +3,16 @@
 
 @import "{{ site.theme }}";
 
+/* Hide description and View on GitHub button, keep title */
+.page-header .project-tagline,
+.page-header .btn {
+  display: none !important;
+}
+
+.page-header {
+  padding: 1rem 6rem !important;
+}
+
 /* Enable word wrapping in code blocks to keep copy button visible */
 .code-container pre code,
 pre code {

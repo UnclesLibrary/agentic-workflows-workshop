@@ -2,7 +2,7 @@
 
 **Workshop:** From Code to Automation: Mastering GitHub Agentic Workflows  
 **Duration:** 2.5+ hours  
-**Date:** [Your Event Date]
+**Date:** April 15, 2026
 
 ---
 
@@ -10,13 +10,11 @@
 
 This handout is organized into separate pages for easy navigation during the workshop. Start with the Setup Guide and work through each exercise in order.
 
-### 🛠️ [Setup Guide](participant-handout-setup.md)
-Prerequisites, installing GitHub CLI, extensions, authentication, repository setup, PAT creation, and CI pipeline configuration.
-
-### 📝 Exercises
+### � Exercises
 
 | # | Exercise | Method | What You'll Build |
 |---|----------|--------|-------------------|
+| 0 | [**Setup Guide** ⬅️ Start here](participant-handout-setup.md) | Guided setup | Prerequisites, CLI, auth, repo & CI config |
 | 1 | [Daily Standup Status](participant-handout-exercise1.md) | Interactive CLI + Cloud Agent | Daily repository activity summary |
 | 2 | [CI Coach](participant-handout-exercise2.md) | Manual creation | CI optimization workflow |
 | 3 | [CI Doctor](participant-handout-exercise3.md) | Manual creation | CI failure diagnostician |
