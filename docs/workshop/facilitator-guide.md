@@ -1364,7 +1364,7 @@ git pull
 
 **Say:**
 
-> "Now that you have well-structured sub-issues, you can assign them to Copilot for automatic implementation. Open a sub-issue and comment `assign: copilot`. Copilot reads the specification, creates a branch, writes the code, and opens a PR. That closes the full automation loop: triage → plan → implement → review."
+> "Now that you have well-structured sub-issues, you can assign them to Copilot for automatic implementation. Open a sub-issue assign it to copilot. Copilot reads the specification, creates a branch, writes the code, and opens a PR. That closes the full automation loop: triage → plan → implement → review."
 
 **Key Insight:**
 

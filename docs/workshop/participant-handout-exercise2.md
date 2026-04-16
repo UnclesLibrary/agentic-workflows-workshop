@@ -391,7 +391,7 @@ Verify that `.github/workflows/ci.yml` now contains test commands by opening the
 
 **Why this matters for Exercise 3:** The CI Doctor diagnoses *failing* CI checks. If your pipeline only builds but never runs tests, there's nothing meaningful for the CI Doctor to diagnose. By letting the CI Coach evolve your pipeline to include tests, you create the conditions where the CI Doctor can demonstrate its value — analyzing test failures, identifying root causes, and posting actionable fixes.
 
-**Key Insight:** By creating this workflow manually, you now understand exactly what the CLI and cloud agent generate behind the scenes. Every agentic workflow is just a markdown file with frontmatter configuration + a natural language prompt. The quality of the prompt directly determines the quality of the agent's output — which is why the detailed 5-phase framework produces better results than a one-line description.
+**Key Insight:** By creating this workflow manually, you now understand exactly what the CLI and cloud agent generate behind the scenes. Every agentic workflow is just a markdown file with frontmatter configuration + a natural language prompt. The quality of the prompt directly determines the quality of the agent's output.
 
 This continuous feedback strengthens your guardrails as you prepare for more autonomous workflows.
 
