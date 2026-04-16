@@ -169,7 +169,6 @@ Now that you have well-structured sub-issues, you can let Copilot implement them
 2. **Assign to Copilot:**
    - Open the sub-issue on GitHub
    - In the issue assign copilot on the top right
-   - Post the comment
 
 3. **Watch Copilot Cloud work:**
    - Copilot Cloud picks up the assignment automatically
